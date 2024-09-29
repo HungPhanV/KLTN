@@ -41,3 +41,12 @@ D:\Project_ASP.NET\QLNS\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.SqlServe
 D:\Project_ASP.NET\QLNS\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.csproj.GenerateResource.Cache
 D:\Project_ASP.NET\QLNS\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.dll
 D:\Project_ASP.NET\QLNS\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.pdb
+C:\KLTN\DemoApp.DataLayers\bin\Debug\DemoApp.DataLayers.dll
+C:\KLTN\DemoApp.DataLayers\bin\Debug\DemoApp.DataLayers.pdb
+C:\KLTN\DemoApp.DataLayers\bin\Debug\DemoApp.Entities.dll
+C:\KLTN\DemoApp.DataLayers\bin\Debug\DemoApp.Entities.pdb
+C:\KLTN\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.csprojResolveAssemblyReference.cache
+C:\KLTN\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.SqlServer.CommandList.resources
+C:\KLTN\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.csproj.GenerateResource.Cache
+C:\KLTN\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.dll
+C:\KLTN\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.pdb

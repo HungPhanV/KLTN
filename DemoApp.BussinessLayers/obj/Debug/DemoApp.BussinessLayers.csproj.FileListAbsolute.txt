@@ -43,3 +43,12 @@ D:\Project_ASP.NET\QLNS\DemoApp.BussinessLayers\bin\Debug\DemoApp.Entities.pdb
 D:\Project_ASP.NET\QLNS\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.csprojResolveAssemblyReference.cache
 D:\Project_ASP.NET\QLNS\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.dll
 D:\Project_ASP.NET\QLNS\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.pdb
+C:\KLTN\DemoApp.BussinessLayers\bin\Debug\DemoApp.BussinessLayers.dll
+C:\KLTN\DemoApp.BussinessLayers\bin\Debug\DemoApp.BussinessLayers.pdb
+C:\KLTN\DemoApp.BussinessLayers\bin\Debug\DemoApp.DataLayers.dll
+C:\KLTN\DemoApp.BussinessLayers\bin\Debug\DemoApp.Entities.dll
+C:\KLTN\DemoApp.BussinessLayers\bin\Debug\DemoApp.DataLayers.pdb
+C:\KLTN\DemoApp.BussinessLayers\bin\Debug\DemoApp.Entities.pdb
+C:\KLTN\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.csprojResolveAssemblyReference.cache
+C:\KLTN\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.dll
+C:\KLTN\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.pdb

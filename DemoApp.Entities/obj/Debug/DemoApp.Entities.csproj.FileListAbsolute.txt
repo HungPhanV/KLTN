@@ -23,3 +23,8 @@ D:\Project_ASP.NET\QLNS\DemoApp.Entities\bin\Debug\DemoApp.Entities.pdb
 D:\Project_ASP.NET\QLNS\DemoApp.Entities\obj\Debug\DemoApp.Entities.csprojResolveAssemblyReference.cache
 D:\Project_ASP.NET\QLNS\DemoApp.Entities\obj\Debug\DemoApp.Entities.dll
 D:\Project_ASP.NET\QLNS\DemoApp.Entities\obj\Debug\DemoApp.Entities.pdb
+C:\KLTN\DemoApp.Entities\bin\Debug\DemoApp.Entities.dll
+C:\KLTN\DemoApp.Entities\bin\Debug\DemoApp.Entities.pdb
+C:\KLTN\DemoApp.Entities\obj\Debug\DemoApp.Entities.csprojResolveAssemblyReference.cache
+C:\KLTN\DemoApp.Entities\obj\Debug\DemoApp.Entities.dll
+C:\KLTN\DemoApp.Entities\obj\Debug\DemoApp.Entities.pdb
