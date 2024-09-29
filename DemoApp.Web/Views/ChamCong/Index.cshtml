@@ -18,10 +18,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         eventContent: function (arg) {
-            return { html: '<div class="fc-title">' + arg.event.title + '</div>' };
+            return { html: '<div class="fc-title" style="font-size:13px;background-color:green;padding:5px;">' + arg.event.title + '</div>' };
         },
         events: events
     });
+
 
     calendar.render();
 });

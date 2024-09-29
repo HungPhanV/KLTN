@@ -142,14 +142,22 @@
 </table>
 <div id="buttons" class="paginate paginate_controls justify-content-end d-flex" style="visibility: unset;">
     <!-- Bổ sung nút trang trước và sau -->
-    <input type="button" value="← prev" id="paginate_control_prev">
-    @for (int i = 1; i <= @ViewBag.TotalPages; i++)
-    {
-        <input type="button" id="id@(i)" value="@i" data-page="@i" class="page-button @(i == ViewBag.CurrentPage ? "active" : "")">
-    }
-    <!-- Bổ sung nút trang kế tiếp -->
-    <input type="button" value="next →" id="paginate_control_next">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="#" id="paginate_control_prev">← prev</a>
+        </li>
+        @for (int i = 1; i <= @ViewBag.TotalPages; i++)
+        {
+            <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                <a class="page-link" href="#" data-page="@i">@i</a>
+            </li>
+        }
+        <li class="page-item">
+            <a class="page-link" href="#" id="paginate_control_next">next →</a>
+        </li>
+    </ul>
 </div>
+
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
