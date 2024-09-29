@@ -1,0 +1,17 @@
+Hiển thị combobox ở chỗ lọc số lượng nhân viên mỗi trang
+Xem được file ở phần hồ sơ và thêm,tải được nhiều file
+                        
+Ở quá trình dùng job strong sql server để chạy thời gian xác định quá trình nào chính thức hay kiêm nhiệm
+Chỉ có 1 quá trình chính thức
+Chỉ có 1 hợp đồng: nếu hợp đồng vô hạn thì ko cần thêm còn nếu hợp  đồng cần thời gian phải nối đuôi thời gian kết thúc của hợp đồng trước
+Hiển thị phòng ban, chức vụ, vị trí hiện tại ở mỗi dòng nơi bảng nhân viên
+Tìm kiếm nhân viên theo phòng ban dựa vào phòng ban hiển thị ở đó
+
+
+
+
+
+
+
+Quản lý châm công, chia ca làm (ca1, ca2,...)
+tới ca đó thì chấm công

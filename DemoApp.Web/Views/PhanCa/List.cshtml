@@ -1,0 +1,78 @@
+﻿@model IEnumerable<DemoApp.Entities.CaLam>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Quản lý ca làm</h2>
+
+
+<table class="table mt-5">
+    <tr>
+    
+        <th>
+            Tên nhân viên
+        </th>
+        <th>
+            Ngày bắt đầu
+        </th>
+        <th>
+           Ngày kết thúc
+        </th>
+        <th>
+            Tên ca
+        </th>
+ 
+        <th  class="text-center" width="30%">
+            Thao tác
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+     
+        <td data-nhanvien="@item.MaNV">
+            @{
+                var maNV = item.MaNV;
+                var danhSachNhanVien = ViewBag.DanhSachNhanVien as List<DemoApp.Entities.NhanVien>;
+
+                if (danhSachNhanVien != null)
+                {
+                    var nhanVien = danhSachNhanVien.FirstOrDefault(nv => nv.MaNV == maNV);
+
+                    if (nhanVien != null)
+                    {
+                        @nhanVien.HoTen
+                    }
+                    else
+                    {
+                        @("Không có")
+                    }
+                }
+                else
+                {
+                    @("Danh sách phòng ban không có")
+                }
+            }
+        </td>
+
+        <td>
+            @item.NgayBatDau.ToString("dd/MM/yyyy")
+        </td>
+        <td>
+            @item.NgayKetThuc.ToString("dd/MM/yyyy")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaLoai)
+        </td>
+ 
+        <td class="btn-group">
+            @Html.ActionLink("Cập nhật", "Update", new { id = item.MaNV }, new { @class = "btn-warning btn-sm btn text-light" }) |
+            @Html.ActionLink("Hồ sơ", "Detail", new { id = item.MaNV, currentPage = ViewBag.ThisPage }, new { @class = " btn-primary btn-sm btn" }) |
+            <button class="btn-danger btn-sm btn delete-button" data-toggle="modal" data-target="#deleteModal" data-delete-id="@item.MaNV">Xoá</button>
+        </td>
+    </tr>
+}
+
+</table>

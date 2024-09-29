@@ -1,0 +1,466 @@
+﻿@model DemoApp.Entities.NhanVien
+@using DemoApp.Entities;
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    /* CSS cho container chứa nút */
+    .btn-group {
+        display: flex;
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center; /* Căn giữa theo chiều dọc */
+    }
+
+    .img_nhanvien {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+    }
+
+    .info-pair {
+        margin-bottom: 10px;
+    }
+
+    .info-label {
+        font-weight: bold;
+        margin-right: 10px;
+    }
+</style>
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Hồ sơ nhân viên</h2>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    @if (!string.IsNullOrEmpty(Model.HinhAnh))
+                    {
+                        <img class="img_nhanvien rounded-circle img-fluid" src="~/img/@Model.HinhAnh" alt="@Model.HoTen" />
+                    }
+                    else
+                    {
+                        <img class="img_nhanvien rounded-circle img-fluid" src="https://via.placeholder.com/150" alt="@Model.HoTen" />
+                    }
+                    <h4 class="mt-3">@Html.DisplayFor(model => model.HoTen)</h4>
+                </div>
+                <div class="col-md-9 mt-5">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="info-pair">
+                                <span class="info-label">Mã nhân viên:</span>
+                                <span class="info-value" data-id="@Model.MaNV">@Html.DisplayFor(model => model.MaNV)</span>
+                            </div>
+
+                            <div class="info-pair">
+                                <span class="info-label">Ngày sinh:</span>
+                                <span class="info-value">@Model.NgaySinh.ToString("dd/MM/yyyy")</span>
+                            </div>
+
+                            <div class="info-pair">
+                                <span class="info-label">Quê quán:</span>
+                                <span class="info-value">@Html.DisplayFor(model => model.QueQuan)</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-pair">
+                                <span class="info-label">Giới tính:</span>
+                                <span class="info-value">@Html.DisplayFor(model => model.GioiTinh)</span>
+                            </div>
+
+                            <div class="info-pair">
+                                <span class="info-label">Số điện thoại:</span>
+                                <span class="info-value">@Html.DisplayFor(model => model.SDT)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="tableContainerQuaTrinh" data-ma-nhan-vien="@Model.MaNV">
+
+                    </div>
+                    <div id="tableContainerHopDong" data-ma-nhan-vien="@Model.MaNV">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="text-center mt-4">
+    <button class="btn btn-success text-white btnTaoQuaTrinh" data-toggle="modal" data-target="#createQuaTrinhModal" data-id="@Model.MaNV">Thêm quá trình</button> |
+    <button class="btn btn-success text-white btnTaoHopDong" data-toggle="modal" data-target="#createHopDongModal" data-id="@Model.MaNV"> Thêm hợp đồng</button> |
+    @Html.ActionLink("Cập nhật thông tin", "Update", new { id = Model.MaNV }, new { @class = "btn btn-warning text-light" }) |
+    @Html.ActionLink("Quay lại danh sách", "Index", "NhanVien", new { page = ViewBag.ThisPage }, new { @class = "btn btn-danger" })
+</div>
+<!-- Modal Tạo Quá Trình Làm Việc -->
+<div class="modal fade" id="createQuaTrinhModal" tabindex="-1" role="dialog" aria-labelledby="createQuaTrinhModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createQuaTrinhModalLabel">Tạo Quá Trình Làm Việc Mới</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="createQuaTrinhForm">
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="maNhanVien" name="maNhanVien">
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("MaPB", "Phòng ban", htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownList("MaPB", new SelectList(ViewBag.DanhSachPhongBan, "MaPB", "TenPB"), "Chọn phòng ban", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessage("MaPB", "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("MaCV", "Chức vụ", htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownList("MaCV", new SelectList(ViewBag.DanhSachChucVu, "MaCV", "TenCV"), "Chọn chức vụ", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessage("MaCV", "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("MaVT", "Vị trí", htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownList("MaVT", new SelectList(ViewBag.DanhSachViTri, "MaVT", "TenVT"), "Chọn vị trí", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessage("MaVT", "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="trangThai">Trạng thái:</label>
+                        <select class="form-control" id="trangThai" name="trangThai">
+                            <option value="Kiêm nhiệm">Kiêm nhiệm</option>
+                            <option value="Chính thức">Chính thức</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="thoiGianBatDau">Thời Gian Bắt Đầu:</label>
+                        <input type="text" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="thoiGianBatDau" name="thoiGianBatDau">
+                    </div>
+                    <div class="form-group">
+                        <label for="thoiGianKetThuc">Thời Gian Kết Thúc:</label>
+                        <input type="text" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="thoiGianKetThuc" name="thoiGianKetThuc">
+                    </div>
+
+                    <button type="submit" class="btn btn-success float-right">Tạo quá trình</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Tạo Hợp Đồng -->
+<div class="modal fade" id="createHopDongModal" tabindex="-1" role="dialog" aria-labelledby="createHopDongModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createHopDongModalLabel">Tạo Hợp Đồng Mới</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="createHopDongForm">
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="maNhanVienHopDong" name="maNhanVienHopDong">
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("MaLoaiHD", "Loại hợp đồng", htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownList("MaLoaiHD", new SelectList(ViewBag.DanhSachLoaiHD, "MaLoaiHD", "TenLoaiHD"), "Chọn loại hợp đồng", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessage("MaLoaiHD", "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="tuNgay">Từ Ngày:</label>
+                        <input type="text" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="tuNgay" name="tuNgay">
+                    </div>
+                    <div class="form-group">
+                        <label for="denNgay">Đến Ngày:</label>
+                        <input type="text" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="denNgay" name="denNgay">
+                    </div>
+
+                    <button type="submit" class="btn btn-success float-right">Tạo hợp đồng</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+    function textToDate(dateText) {
+        var parts = dateText.split('/');
+        var day = parseInt(parts[0], 10) + 1;
+        var month = parseInt(parts[1], 10) - 1; // Months are 0-indexed in JavaScript
+        var year = parseInt(parts[2], 10);
+        return new Date(year, month, day);
+    }
+
+    // Gọi hàm loadTableData() ngay khi trang được nạp hoàn toàn
+    $(document).ready(function () {
+        loadTableDataQuaTrinh();
+        loadTableDataHopDong();
+    });
+
+    // Hàm để tải lại dữ liệu bảng
+    function loadTableDataHopDong() {
+        // Lấy mã nhân viên từ data attribute
+        var maNhanVien = $("#tableContainerHopDong").data("ma-nhan-vien");
+
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GetTableData", "HopDong")",
+            data: { maNhanVien: maNhanVien }, // Truyền mã nhân viên lên server
+            dataType: 'html',
+            success: function (data) {
+                // Nếu không có thông báo, hiển thị dữ liệu bảng
+                $("#tableContainerHopDong").html(data);
+            },
+            error: function (error) {
+                console.error('Lỗi khi tải lại bảng:', error);
+            }
+        });
+    }
+
+    // Hàm để tải lại dữ liệu bảng
+    function loadTableDataQuaTrinh() {
+        // Lấy mã nhân viên từ data attribute
+        var maNhanVien = $("#tableContainerQuaTrinh").data("ma-nhan-vien");
+
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GetTableData", "QuaTrinh")",
+            data: { maNhanVien: maNhanVien }, // Truyền mã nhân viên lên server
+            dataType: 'html',
+            success: function (data) {
+                $("#tableContainerQuaTrinh").html(data);
+            },
+            error: function (error) {
+                console.error('Lỗi khi tải lại bảng:', error);
+            }
+        });
+    }
+
+    //Thêm quá trình
+    $('.btnTaoQuaTrinh').click(function () {
+        // Lấy mã nhân viên từ thuộc tính data-id của thẻ span
+        var maNV = $(".info-value").data("id");
+
+        // Đặt giá trị cho trường mã nhân viên trong modal
+        $("#maNhanVien").val(maNV);
+    });
+    // Sự kiện khi nút "Tạo Quá Trình" được bấm
+    $("#createQuaTrinhForm").submit(function (event) {
+        event.preventDefault(); // Ngăn chặn form gửi thông tin một cách truyền thống
+
+        // Lấy dữ liệu từ các trường trong modal
+        var maNhanVien = $("#maNhanVien").val().trim();
+        var maPhongBan = $("#MaPB").val();
+        var maChucVu = $("#MaCV").val();
+        var maViTri = $("#MaVT").val();
+        var trangThai = $("#trangThai").val();
+        var thoiGianBatDau = $("#thoiGianBatDau").val();
+        var thoiGianKetThuc = $("#thoiGianKetThuc").val();
+        // Kiểm tra nếu thời gian bắt đầu lớn hơn thời gian kết thúc
+        if (maPhongBan === "") {
+            // Hiển thị thông báo lỗi
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi',
+                text: 'Vui lòng chọn phòng ban.',
+            });
+            return; // Ngăn chặn tiếp tục thực hiện AJAX nếu có lỗi
+        }
+        if (maChucVu === "") {
+            // Hiển thị thông báo lỗi
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi',
+                text: 'Vui lòng chọn chức vụ.',
+            });
+            return; // Ngăn chặn tiếp tục thực hiện AJAX nếu có lỗi
+        }
+        if (maViTri === "") {
+            // Hiển thị thông báo lỗi
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi',
+                text: 'Vui lòng chọn vị trí.',
+            });
+            return; // Ngăn chặn tiếp tục thực hiện AJAX nếu có lỗi
+        }
+        if (thoiGianBatDau === "") {
+            // Hiển thị thông báo lỗi
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi',
+                text: 'Vui lòng chọn thời gian bắt đầu.',
+            });
+            return; // Ngăn chặn tiếp tục thực hiện AJAX nếu có lỗi
+        }
+        
+        if (thoiGianKetThuc !== "") {
+            // Convert date strings to ISO 8601 format
+            var thoiGianBatDauISO = thoiGianBatDau.substring(6, 10) + "-" + thoiGianBatDau.substring(3, 5) + "-" + thoiGianBatDau.substring(0, 2);
+            var thoiGianKetThucISO = thoiGianKetThuc.substring(6, 10) + "-" + thoiGianKetThuc.substring(3, 5) + "-" + thoiGianKetThuc.substring(0, 2);
+
+            if (thoiGianBatDauISO > thoiGianKetThucISO) {
+                // Display an error message
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi',
+                    text: 'Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc.',
+                });
+                return; // Prevent further processing if there is an error
+            }
+            var formattedThoiGianKetThuc = textToDate(thoiGianKetThuc).toISOString().substring(0, 10);
+        }
+
+        // Chuyển đổi ngày thành chuỗi "yyyy-MM-dd" cho input type="date"
+       
+        var formattedThoiGianBatDau = textToDate(thoiGianBatDau).toISOString().substring(0, 10);
+
+        // Gửi dữ liệu thông qua AJAX
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("Create", "QuaTrinh")",
+            data: {
+                MaNV: maNhanVien,
+                MaPB: maPhongBan,
+                MaCV: maChucVu,
+                MaVT: maViTri,
+                TrangThai: trangThai,
+                ThoiGianBatDau: formattedThoiGianBatDau,
+                ThoiGianKetThuc: formattedThoiGianKetThuc
+            },
+            success: function (response) {
+                if (response.success) {
+
+                    // Hiển thị thông báo thành công
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Tạo quá trình thành công!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    // Đóng popup sau khi thêm thành công
+                    $("#createQuaTrinhModal").modal("hide");
+
+                    // Reset các trường thông tin trong modal
+                    $("#maNhanVien").val("");
+                    $("#MaPB").val("");
+                    $("#MaCV").val("");
+                    $("#MaVT").val("");
+                    $("#thoiGianBatDau").val("");
+                    $("#thoiGianKetThuc").val("");
+                    loadTableDataQuaTrinh();
+                } else {
+                    // Xử lý lỗi nếu có
+                    console.error("Lỗi khi tạo quá trình mới:", response.message);
+                }
+            },
+            error: function (error) {
+                // Xử lý lỗi nếu có
+                console.error("Lỗi khi tạo quá trình mới:", error);
+            }
+        });
+    });
+
+
+    //Thêm hợp đồng
+    $('.btnTaoHopDong').click(function () {
+        // Lấy mã nhân viên từ thuộc tính data-id của thẻ span
+        var maNV = $(".info-value").data("id");
+
+        // Đặt giá trị cho trường mã nhân viên trong modal
+        $("#maNhanVienHopDong").val(maNV);
+    });
+
+    // Sự kiện khi nút "Tạo Hợp Đồng" được bấm
+    $("#createHopDongForm").submit(function (event) {
+        event.preventDefault(); // Ngăn chặn form gửi thông tin một cách truyền thống
+
+        // Lấy dữ liệu từ các trường trong modal
+        var maNhanVienHopDong = $("#maNhanVienHopDong").val();
+        var maLoaiHD = $("#MaLoaiHD").val();
+        var tuNgay = $("#tuNgay").val();
+        var denNgay = $("#denNgay").val();
+        if (maLoaiHD === "") {
+            // Hiển thị thông báo lỗi
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi',
+                text: 'Vui lòng chọn loại hợp đồng.',
+            });
+            return; // Ngăn chặn tiếp tục thực hiện AJAX nếu có lỗi
+        }
+        if (tuNgay === "") {
+            // Hiển thị thông báo lỗi
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi',
+                text: 'Vui lòng chọn thời gian bắt đầu.',
+            });
+            return; // Ngăn chặn tiếp tục thực hiện AJAX nếu có lỗi
+        }
+        if (denNgay !== "") {
+            if (tuNgay > denNgay) {
+                // Hiển thị thông báo lỗi
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi',
+                    text: 'Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc.',
+                });
+                return; // Ngăn chặn tiếp tục thực hiện AJAX nếu có lỗi
+            }
+            var formattedDenNgay = textToDate(denNgay).toISOString().substring(0, 10);
+        }
+        // Chuyển đổi ngày thành chuỗi "yyyy-MM-dd" cho input type="date"
+        var formattedTuNgay = textToDate(tuNgay).toISOString().substring(0, 10);
+
+        // Gửi dữ liệu thông qua AJAX
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("Create", "HopDong")", // Đảm bảo rằng đường dẫn và tên hành động đúng
+            data: {
+                MaNV: maNhanVienHopDong,
+                MaLoaiHD: maLoaiHD,
+                TuNgay: formattedTuNgay,
+                DenNgay: formattedDenNgay
+            },
+            success: function (response) {
+                if (response.success) {
+                    // Hiển thị thông báo thành công
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Tạo hợp đồng thành công!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    // Đóng popup sau khi thêm thành công
+                    $("#createHopDongModal").modal("hide");
+
+                    // Reset các trường thông tin trong modal
+                    $("#maNhanVienHopDong").val("");
+                    $("#MaLoaiHD").val("");
+                    $("#tuNgay").val("");
+                    $("#denNgay").val("");
+                    loadTableDataHopDong();
+                } else {
+                    // Xử lý lỗi nếu có
+                    console.error("Lỗi khi tạo hợp đồng mới:", response.message);
+                }
+            },
+            error: function (error) {
+                // Xử lý lỗi nếu có
+                console.error("Lỗi khi tạo hợp đồng mới:", error);
+            }
+        });
+    });
+
+</script>

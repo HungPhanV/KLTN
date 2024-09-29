@@ -1,0 +1,169 @@
+﻿@model IEnumerable<DemoApp.Entities.NhanVien>
+@using DemoApp.Entities;
+
+<style>
+    .img_avatar {
+        width: 20px;
+        height: 20px;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row justify-content-end">
+        <div class="form-group col-md-2">
+            <label for="tuNgay">Từ ngày:</label>
+            <input type="text" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="tuNgay">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="denNgay">Đến ngày:</label>
+            <input type="text" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="denNgay">
+        </div>
+    </div>
+
+}
+<table class="table table-condensed mt-4">
+    <tr>
+        <th>
+            Họ tên
+        </th>
+        <th width="20%">
+            Ca làm
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td data-nhanvien="@item.MaNV">
+                @{
+                    var maNV = item.MaNV;
+                    var danhSachNhanVien = ViewBag.DachSachNhanVien as List<DemoApp.Entities.NhanVien>;
+
+                    if (danhSachNhanVien != null)
+                    {
+                        var nhanVien = danhSachNhanVien.FirstOrDefault(nv => nv.MaNV == maNV);
+
+                        if (nhanVien != null)
+                        {
+                            <img class="img_avatar rounded-circle img-fluid" src="~/img/@item.HinhAnh" alt="@item.HoTen" />@nhanVien.HoTen
+
+                        }
+                        else
+                        {
+                            @("Lỗi")
+                        }
+                    }
+                    else
+                    {
+                        @("Lỗi")
+                    }
+                }
+
+            </td>
+            <td>
+                <div class="form-group">
+                    @Html.DropDownList("MaLoai", new SelectList(ViewBag.DachSachCaLam, "MaLoai", "TenCa"), "Chọn ca làm", htmlAttributes: new { @class = "form-control maLoaiDropdown", @id = "MaLoai_" + item.MaNV })
+                </div>
+            </td>
+
+        </tr>
+                    }
+</table>
+<div class="paginate paginate_controls justify-content-end d-flex d-block m-2" style="visibility: unset;">
+    <button class="btn btn-success luuCaLam">Lưu ca làm</button>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".luuCaLam").click(function () {
+            var tuNgay = $("#tuNgay").val();
+            var denNgay = $("#denNgay").val();
+            if (!denNgay) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Bạn phải ngày kết thúc!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                return;
+            }
+
+            // Kiểm tra nếu ngày kết thúc nhỏ hơn hoặc bằng ngày bắt đầu
+            var startDate = new Date(tuNgay);
+            var endDate = new Date(denNgay);
+            if (endDate < startDate) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ngày kết thúc phải lớn hơn ngày bắt đầu!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                return;
+            }
+            // Kiểm tra nếu không chọn ít nhất 1 combobox
+            if ($('.maLoaiDropdown').filter(function () { return $(this).val(); }).length === 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Bạn phải chọn ca làm!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                return;
+            }
+
+     
+
+            // Thực hiện lưu ca làm nếu validate thành công
+            var chamCongData = [];
+            $('select.maLoaiDropdown').each(function () {
+                var maNV = $(this).attr("id").replace("MaLoai_", "");
+                var maLoai = $(this).val();
+
+                chamCongData.push({
+                    MaNV: maNV,
+                    NgayBatDau: tuNgay.split('/').reverse().join('-'),
+                    NgayKetThuc: denNgay.split('/').reverse().join('-'),
+                    MaLoai: maLoai
+                });
+            });
+
+            // Gửi dữ liệu qua Ajax
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("InsertCaLam", "PhanCa")",
+                data: {
+                    chamCongData: chamCongData
+                },
+                success: function (data) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Phân ca thành công!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    // Sử dụng window.location.reload() để tải lại trang sau 1,5 giây
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1500);
+                },
+                error: function (error) {
+                    // Xử lý lỗi
+                }
+            });
+        });
+    });
+
+    // Lấy ngày hôm nay
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+    var yyyy = today.getFullYear();
+
+    // Định dạng ngày theo định dạng "dd/mm/yyyy"
+    today = dd + '/' + mm + '/' + yyyy;
+
+    // Thiết lập giá trị mặc định cho trường input
+    document.getElementById("tuNgay").value = today;
+</script>

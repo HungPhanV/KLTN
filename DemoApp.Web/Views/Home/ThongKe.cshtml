@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "ThongKe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Thống kê</h2>
+
+<div class="row">
+    <div class="col-md-6 text-center">
+        <h5>Nhân viên theo giới tính</h5>
+        <canvas id="myChart1" width="400" height="200"></canvas>
+    </div>
+    <div class="col-md-6 text-center">
+        <h5>Thống kê số lượng</h5>
+        <canvas id="myChart2" width="400" height="400"></canvas>
+    </div>
+</div>
+
+<script>
+    // Biểu đồ thống kê số lượng nhân viên theo giới tính
+    var ctx1 = document.getElementById('myChart1').getContext('2d');
+    var data1 = {
+        labels: ['Nam', 'Nữ'],
+        datasets: [{
+            label: 'Số lượng nhân viên',
+            data: [@ViewBag.SLNVNam, @ViewBag.SLNVNu],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth:2
+        }]
+    };
+    var myChart1 = new Chart(ctx1, {
+        type: 'pie',
+        data: data1,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Biểu đồ thống kê số lượng nhân viên, phòng ban, và hợp đồng
+    var ctx2 = document.getElementById('myChart2').getContext('2d');
+    var data2 = {
+        labels: ['Nhân viên', 'Phòng ban', 'Hợp đồng'],
+        datasets: [{
+            label: 'Số lượng',
+            data: [@ViewBag.SLNV, @ViewBag.SLPB, @ViewBag.SLHD],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(25, 22, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(25, 22, 235, 1)'
+            ],
+            borderWidth: 2
+        }]
+    };
+    var myChart2 = new Chart(ctx2, {
+        type: 'bar',
+        data: data2,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

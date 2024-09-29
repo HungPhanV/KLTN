@@ -1,0 +1,171 @@
+﻿@model IEnumerable<DemoApp.Entities.NhanVien>
+@using DemoApp.Entities;
+@{
+    ViewBag.Title = "ListNV";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    var selectedEmployee = null;
+    var selectedDepartment = null;
+
+    function selectEmployee(employeeId) {
+        selectedEmployee = employeeId;
+    }
+
+    function selectDepartment(departmentId) {
+        selectedDepartment = departmentId;
+    }
+</script>
+
+<h2 class="text-center mt-4 mb-4">Danh sách nhân viên của phòng ban</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Mã nhân viên
+        </th>
+        <th>
+            Họ và tên
+        </th>
+        <th>
+          Ngày sinh
+        </th>
+        <th>
+            Quê quán
+        </th>
+        <th>
+            Giới tính
+        </th>
+        <th>
+            Số điện thoại
+        </th>
+        <th>
+            Chức vụ
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaNV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoTen)
+            </td>
+            <td>
+                @item.NgaySinh.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QueQuan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GioiTinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SDT)
+            </td>
+            <td>
+                @{
+                    var maCV = item.MaCV;
+                    var danhSachChucVu = ViewBag.DanhSachChucVu as List<ChucVu>; // Ép kiểu danh sách phòng ban từ ViewBag
+
+                    if (danhSachChucVu != null)
+                    {
+                        var chucVu = danhSachChucVu.FirstOrDefault(pb => pb.MaCV == maCV);// TÌm phòng ban đầu tiên trong ds có MaPB trùng khớp với maPB
+
+                        if (chucVu != null)
+                        {
+                            @chucVu.TenCV
+                        }
+                        else
+                        {
+                            // Xử lý nếu không tìm thấy phòng ban tương ứng
+                            @("Phòng ban không xác định")
+                        }
+                    }
+                    else
+                    {
+                        // Xử lý nếu danh sách phòng ban không tồn tại trong ViewBag
+                        @("Danh sách phòng ban không có")
+                    }
+                }
+
+
+            </td>
+     
+            <td>
+                <button class="btn btn-warning btn-sm btnChuyenPhongBan" data-toggle="modal" data-target="#chuyenPhongBanModal_@item.MaNV" data-id="@item.MaNV">Chuyển phòng ban</button>
+                <!-- Modal -->
+                <div class="modal fade" id="chuyenPhongBanModal_@item.MaNV" tabindex="-1" role="dialog" aria-labelledby="chuyenPhongBanModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="chuyenPhongBanModalLabel">Chuyển phòng ban</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <label for="phongBanMoi">Chọn bộ phận mới:</label>
+                                @Html.DropDownList("phongBanMoi", new SelectList(ViewBag.DanhSachPhongBan, "MaPB", "TenPB"), new { @class = "form-control" })
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                <button class="btn btn-warning btn-sm btnChuyenPhongBanModal" data-id="@item.MaNV">Chuyển</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+        </tr>
+    }
+</table>
+
+<div>
+    @Html.ActionLink("Trở lại", "Index")
+</div>
+
+<script>
+    // Chuyển bộ phận
+    $(document).ready(function () {
+        $('.btnChuyenPhongBanModal').on('click', function () {
+            var idNhanVien = $(this).data('id'); // Lấy giá trị mã Nhân Viên từ data-id
+            var idPhongBanMoi = $('#phongBanMoi').val();
+
+            // Tạo một đối tượng dữ liệu để gửi POST request
+            var postData = {
+                idNhanVien: idNhanVien,
+                idPhongBanMoi: idPhongBanMoi
+            };
+
+            // Gửi POST request để thực hiện chuyển phòng ban
+            $.ajax({
+                url: '@Url.Action("ChuyenNhanVien", "PhongBan")',
+                type: 'POST', // Sử dụng phương thức POST
+                data: postData, // Sử dụng dữ liệu đã tạo ở trên
+                success: function (data) {
+                    // Nếu chuyển phòng ban thành công, cập nhật nội dung của modal
+                    $('#chuyenPhongBanModal .modal-content').html(data);
+                }
+            });
+
+            // Đóng modal sau khi chuyển phòng ban
+            $('#chuyenPhongBanModal').modal('hide');
+            //Hiển thị thông báo sau khi chuyển thành công và load lại trang
+            Swal.fire({
+                icon: 'success',
+                title: 'Chuyển phòng ban thành công!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+            // Reset lại trang sau khi chuyển phòng ban thành công
+            setTimeout(function () {
+                location.reload();
+            }, 1500);
+        });
+    });
+</script>

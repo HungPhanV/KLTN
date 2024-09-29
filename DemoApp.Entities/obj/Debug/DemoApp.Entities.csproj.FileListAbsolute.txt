@@ -1,0 +1,25 @@
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Entities\bin\Debug\DemoApp.Entities.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Entities\bin\Debug\DemoApp.Entities.pdb
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Entities\obj\Debug\DemoApp.Entities.csprojResolveAssemblyReference.cache
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Entities\obj\Debug\DemoApp.Entities.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Entities\obj\Debug\DemoApp.Entities.pdb
+I:\MyProjects\DemoApp\DemoApp.Entities\bin\Debug\DemoApp.Entities.dll
+I:\MyProjects\DemoApp\DemoApp.Entities\bin\Debug\DemoApp.Entities.pdb
+I:\MyProjects\DemoApp\DemoApp.Entities\obj\Debug\DemoApp.Entities.csprojResolveAssemblyReference.cache
+I:\MyProjects\DemoApp\DemoApp.Entities\obj\Debug\DemoApp.Entities.dll
+I:\MyProjects\DemoApp\DemoApp.Entities\obj\Debug\DemoApp.Entities.pdb
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Entities\bin\Debug\DemoApp.Entities.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Entities\bin\Debug\DemoApp.Entities.pdb
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Entities\obj\Debug\DemoApp.Entities.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Entities\obj\Debug\DemoApp.Entities.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Entities\obj\Debug\DemoApp.Entities.pdb
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Entities\bin\Debug\DemoApp.Entities.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Entities\bin\Debug\DemoApp.Entities.pdb
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Entities\obj\Debug\DemoApp.Entities.csprojResolveAssemblyReference.cache
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Entities\obj\Debug\DemoApp.Entities.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Entities\obj\Debug\DemoApp.Entities.pdb
+D:\Project_ASP.NET\QLNS\DemoApp.Entities\bin\Debug\DemoApp.Entities.dll
+D:\Project_ASP.NET\QLNS\DemoApp.Entities\bin\Debug\DemoApp.Entities.pdb
+D:\Project_ASP.NET\QLNS\DemoApp.Entities\obj\Debug\DemoApp.Entities.csprojResolveAssemblyReference.cache
+D:\Project_ASP.NET\QLNS\DemoApp.Entities\obj\Debug\DemoApp.Entities.dll
+D:\Project_ASP.NET\QLNS\DemoApp.Entities\obj\Debug\DemoApp.Entities.pdb

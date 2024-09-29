@@ -1,0 +1,256 @@
+﻿@model IEnumerable<DemoApp.Entities.NhanVien>
+@using DemoApp.Entities;
+
+<style>
+    .img_avatar {
+        width: 20px;
+        height: 20px;
+    }
+</style>
+<div class="mb-4 mt-4">
+    @Html.ActionLink("Tạo nhân viên mới", "Create", null, new { @class = "btn btn-success" })
+</div>
+<table class="table table-condensed mt-4">
+    <tr>
+        <th>
+            Họ tên
+
+        </th>
+
+        <th>
+            Giới tính
+        </th>
+        <th>
+            Số điện thoại
+        </th>
+        <th>
+            Phòng ban
+        </th>
+        <th>
+            Chức vụ
+        </th>
+        <th>
+            Vị trí
+        </th>
+
+        <th class="text-center">Thao tác</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+       
+        <tr>
+            <td class="hidden">
+                @Html.DisplayFor(modelItem => item.MaNV)
+            </td>
+            <td>
+                <img class="img_avatar rounded-circle img-fluid" src="~/img/@item.HinhAnh" alt="@item.HoTen" /> @Html.DisplayFor(modelItem => item.HoTen)
+                <div class="tableContainerQuaTrinh" data-ma-nhan-vien="@item.MaNV">
+
+                </div>
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.GioiTinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SDT)
+            </td>
+            <td data-phongban="@item.MaPB">
+                @{
+                    var maPB = item.MaPB;
+                    var danhSachPhongBan = ViewBag.DanhSachPhongBan as List<DemoApp.Entities.PhongBan>;
+
+                    if (danhSachPhongBan != null)
+                    {
+                        var phongBan = danhSachPhongBan.FirstOrDefault(pb => pb.MaPB == maPB);
+
+                        if (phongBan != null)
+                        {
+                            @phongBan.TenPB
+                        }
+                        else
+                        {
+                            @("Không có")
+                        }
+                    }
+                    else
+                    {
+                        @("Danh sách phòng ban không có")
+                    }
+                }
+            </td>
+            <td data-chucvu="@item.MaCV">
+                @{
+                    var maCV = item.MaCV;
+                    var danhSachChucVu = ViewBag.DanhSachChucVu as List<DemoApp.Entities.ChucVu>;
+
+                    if (danhSachChucVu != null)
+                    {
+                        var chucVu = danhSachChucVu.FirstOrDefault(cv => cv.MaCV == maCV);
+
+                        if (chucVu != null)
+                        {
+                            @chucVu.TenCV
+                        }
+                        else
+                        {
+                            @("Không có")
+                        }
+                    }
+                    else
+                    {
+                        @("Danh sách chức vụ không có")
+                    }
+                }
+            </td>
+            <td data-vitri="@item.MaVT">
+                @{
+                    var maVT = item.MaVT;
+                    var danhSachViTri = ViewBag.DanhSachViTri as List<DemoApp.Entities.ViTri>;
+
+                    if (danhSachViTri != null)
+                    {
+                        var viTri = danhSachViTri.FirstOrDefault(vt => vt.MaVT == maVT);
+
+                        if (viTri != null)
+                        {
+                            @viTri.TenVT
+                        }
+                        else
+                        {
+                            @("Không có")
+                        }
+                    }
+                    else
+                    {
+                        @("Danh sách chức vụ không có")
+                    }
+                }
+            </td>
+
+
+            <td class="btn-group">
+                @Html.ActionLink("Cập nhật", "Update", new { id = item.MaNV }, new { @class = "btn-warning btn-sm btn text-light" }) |
+                @Html.ActionLink("Hồ sơ", "Detail", new { id = item.MaNV, currentPage = ViewBag.ThisPage }, new { @class = " btn-primary btn-sm btn" }) |
+                <button class="btn-danger btn-sm btn delete-button" data-toggle="modal" data-target="#deleteModal" data-delete-id="@item.MaNV">Xoá</button>
+            </td>
+        </tr>
+    }
+
+
+</table>
+<div id="buttons" class="paginate paginate_controls justify-content-end d-flex" style="visibility: unset;">
+    <!-- Bổ sung nút trang trước và sau -->
+    <input type="button" value="← prev" id="paginate_control_prev">
+    @for (int i = 1; i <= @ViewBag.TotalPages; i++)
+    {
+        <input type="button" id="id@(i)" value="@i" data-page="@i" class="page-button @(i == ViewBag.CurrentPage ? "active" : "")">
+    }
+    <!-- Bổ sung nút trang kế tiếp -->
+    <input type="button" value="next →" id="paginate_control_next">
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Xác nhận xoá</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xoá nhân viên không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <form id="deleteForm" action="" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" id="deleteId" />
+                    <button type="submit" class="btn btn-danger" id="btn-delete-modal">Xoá</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Xử lý sự kiện khi nút "next" được nhấn
+    $("#paginate_control_next").click(function () {
+        if (currentPage < totalPages) {
+            currentPage++;
+            loadTableData(currentPage);
+            setActiveButton(selectedPage); // Set the active button for the next page
+        }
+        if (currentPage === totalPages) {
+            $(this).prop('disabled', true); // Ngăn chặn việc nhấn nút "next" nếu đang ở trang cuối cùng
+        }
+    });
+    // Xử lý sự kiện khi nút "prev" được nhấn
+    $("#paginate_control_prev").click(function () {
+        if (currentPage > 1) {
+            currentPage--;
+            loadTableData(currentPage);
+            setActiveButton(selectedPage); // Set the active button for the previous page
+        }
+        // Enable the "next" button when navigating back from the last page
+        $("#paginate_control_next").prop('disabled', false);
+    });
+    // Add an event listener to handle clicks on numeric buttons
+    $(".page-button").click(function () {
+        var selectedPage = $(this).data("page"); // Get the page number from data-page attribute
+        setActiveButton(selectedPage); // Set the active button for the clicked page
+        loadTableData(selectedPage); // Load data for the selected page
+    });
+
+    // Sự kiện khi nút "Xoá" được bấm
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Nút "Xoá" được bấm
+        var deleteId = button.data('delete-id'); // Lấy mã phòng ban cần xoá từ thuộc tính data-delete-id
+
+        // Gán mã phòng ban vào trường ẩn trong modal xoá
+        $('#deleteId').val(deleteId);
+    });
+
+    // Sự kiện khi nút "Xoá" trong modal được bấm
+    $('#btn-delete-modal').click(function (event) {
+        event.preventDefault(); // Ngăn chặn hành động mặc định của form
+
+        // Lấy mã phòng ban cần xoá từ trường ẩn trong modal
+        var deleteId = $('#deleteId').val();
+
+        // Gửi yêu cầu xoá thông qua Ajax
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("DeleteConfirmed", "NhanVien")" + '/' + deleteId, // Tạo URL cho việc xoá
+            data: {
+                __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val()
+            }, // Cần gửi Token chống CSRF nếu sử dụng AntiForgeryToken
+            success: function (response) {
+                if (response.success) {
+                    // Hiển thị thông báo thành công
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Xoá thành công!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    // Đóng modal sau khi xoá thành công
+                    $('#deleteModal').modal('hide');
+
+                    // Tải lại bảng dữ liệu sau khi xoá
+                    loadTableData(currentPage);
+                } else {
+                    // Xử lý lỗi nếu có
+                    console.error("Lỗi khi xoá nhân viên:", response.message);
+                }
+            },
+            error: function (error) {
+                // Xử lý lỗi nếu có
+                console.error("Lỗi khi xoá nhân viên:", error);
+            }
+        });
+    });
+
+</script>

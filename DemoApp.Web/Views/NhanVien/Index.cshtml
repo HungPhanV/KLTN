@@ -1,0 +1,136 @@
+﻿@model IEnumerable<DemoApp.Entities.NhanVien>
+@using DemoApp.Entities;
+@using DemoApp.BussinessLayers;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center mt-3">
+    <h2>Danh sách nhân viên </h2>
+</div>
+
+<div class="row justify-content-end mt-4">
+    <div class="col-md-2">
+        <!-- Dropdown chọn phòng ban -->
+        <select id="positionFilter" class="form-control">
+            <option value="0">Tất cả phòng ban</option>
+            @foreach (var phongBan in ViewBag.DanhSachPhongBan)
+            {
+                <option value="@phongBan.MaPB">@phongBan.TenPB</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <!-- Dropdown chọn giới tính -->
+        <select id="genderFilter" class="form-control">
+            <option value="all">Tất cả giới tính</option>
+            <option value="Nam">Nam</option>
+            <option value="Nữ">Nữ</option>
+            <option value="Khác">Khác</option>
+        </select>
+    </div>
+    <div class="col-md-3 justify-content-end">
+        <div class="input-group">
+            <input type="text" id="searchInput" class="form-control" placeholder="Nhập tên nhân viên...">
+            <div class="input-group-append">
+                <button class="btn btn-primary" id="searchAndFilterButton" type="button"> Tìm kiếm</button>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<div id="tableContainer">
+    <!-- Đây là nơi dữ liệu danh sách nhân viên sẽ được hiển thị -->
+
+</div>
+<div class="col-md-2 row">
+    <div class="col-md-9">        
+        <h6>Số lượng NV</h6>
+        <div class="input-group">
+            <select id="pageSizeSelect" class="form-control">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <!-- Thêm các giá trị khác tại đây nếu cần -->
+            </select>
+            <div class="input-group-append">
+                <button class="btn btn-outline-primary" id="setPageSizeButton" type="button">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var currentPage = @ViewBag.CurrentPage;
+    var totalPages = @ViewBag.TotalPages;
+    var defaultPageSize = 5; // Kích thước trang mặc định
+    $("#setPageSizeButton").click(function () {
+        var newPageSize = parseInt($("#pageSizeSelect").val());
+
+        if (!isNaN(newPageSize) && newPageSize > 0) {
+            defaultPageSize = newPageSize; // Thay đổi giá trị defaultPageSize
+            currentPage = 1; // Reset current page to 1
+
+            // Tính toán lại totalPages dựa trên số lượng nhân viên và kích thước trang mới
+            totalPages = Math.ceil(@(Model.Count()) / defaultPageSize);
+
+            loadTableData(currentPage); // Tải lại dữ liệu với kích thước trang mới
+        } else {
+            alert("Vui lòng chọn một tùy chọn hợp lệ.");
+        }
+    });
+
+
+    $(document).ready(function () {
+        loadTableData(currentPage); // Load data for the initial page
+        loadTableDataQuaTrinh()
+        setActiveButton(currentPage); // Set the initial active button
+    });
+
+    function setActiveButton(page) {
+        $(".page-button").removeClass("active"); // Remove the active class from all numeric buttons
+        $("#id" + page).addClass("active"); // Add the active class to the selected numeric button
+    }
+
+    function loadTableData(page) {
+        var searchInput = $("#searchInput").val();
+        var gender = $("#genderFilter").val();
+        var maPB = $("#positionFilter").val();
+        var pageSize = defaultPageSize; // Sử dụng kích thước trang mặc định
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("SearchAndFilterPaged", "NhanVien")",
+            data: { searchTerm: searchInput, gender: gender, maPB: maPB, page: page, pageSize: pageSize },
+            dataType: 'html',
+            success: function (data) {
+                $("#tableContainer").html(data);
+                setActiveButton(page);
+            },
+            error: function (error) {
+                console.error('Lỗi khi tải lại bảng:', error);
+            }
+        });S
+    }
+
+    // Xử lý sự kiện khi nút "Lọc và Tìm kiếm" được bấm
+    $("#searchAndFilterButton").click(function () {
+        currentPage = 1; // Reset current page to 1 when filtering
+        // Lấy giá trị của các biến
+       
+        var searchInputValue = $("#searchInput").val();
+        var genderValue = $("#genderFilter").val();
+        var MaPB = $("#positionFilter").val();
+        console.log(searchInputValue);
+        console.log(genderValue);
+        console.log(MaPB);
+        loadTableData(currentPage);
+    });
+
+
+</script>

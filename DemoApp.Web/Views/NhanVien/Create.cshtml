@@ -1,0 +1,120 @@
+﻿@model DemoApp.Entities.NhanVien
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .form-container {
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-title {
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+
+
+        /* CSS cho container chứa nút */
+    .btn-group {
+        display: flex;
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        gap: 10px; /* Khoảng cách giữa các nút */
+    }
+</style>
+
+<div class="container">
+    <h1 class="form-title text-danger text-center">Tạo nhân viên mới</h1>
+    <div class="row">    
+        <div class="col-md-12 col-md-offset-2">
+            <div class="form-container">
+                
+
+                @using (Html.BeginForm("Create","NhanVien",FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                Họ tên
+                                @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                Ngày sinh
+                                <input type="date" id="NgaySinh" name="NgaySinh" class="form-control">
+                                @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                Quê quán
+                                <select id="QueQuan" name="QueQuan" class="form-control">
+                                    <option value="">Chọn quê quán</option>
+                                    <option value="Hà Nội">Hà Nội</option>
+                                    <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                    <!-- Thêm các tỉnh thành khác vào đây -->
+                                    <option value="An Giang">An Giang</option>
+                                    <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
+                                    <!-- Thêm tất cả các tỉnh thành khác ở đây -->
+                                </select>
+                                @Html.ValidationMessageFor(model => model.QueQuan, "", new { @class = "text-danger" })
+                            </div>
+                     
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Giới tính:</label>
+                                <div class="horizontal-radio">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" name="GioiTinh" value="Nam" id="radNam">
+                                        <label class="form-check-label" for="radNam">Nam</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" name="GioiTinh" value="Nữ" id="radNu">
+                                        <label class="form-check-label" for="radNu">Nữ</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" name="GioiTinh" value="Khác" id="radKhac">
+                                        <label class="form-check-label" for="radKhac">Khác</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                Số điện thoại
+                                @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                Hình ảnh
+                                <input type="file" id="HinhAnh" name="file" class="form-control-file" accept="image/*" />
+                                @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
+                            </div>
+                            
+                           
+
+                        </div>
+                    </div>
+
+                    <div class="btn-group mt-5">
+                        <div class="submit-button">
+                            <button type="submit" class="btn btn-success">Tạo</button>
+                        </div>
+                        <div class="text-center">
+                            @Html.ActionLink("Trở lại danh sách", "Index", null, new { @class = "btn btn-danger" })
+                        </div>
+                    </div>
+                }
+
+               
+            </div>
+        </div>
+    </div>
+</div>

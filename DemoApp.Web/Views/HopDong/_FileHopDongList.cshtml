@@ -1,0 +1,106 @@
+﻿@model IEnumerable<DemoApp.Entities.FileHopDong>
+
+<h4 class="text-center mb-4">Danh sách các file hợp đồng</h4>
+
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Mã file</th>
+            <th>Tên File</th>
+            <th>Lưu Trữ</th>
+            <th>Ghi Chú</th>
+            <th class="text-center">Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var file in Model)
+        {
+            <tr>
+                <td>@file.MaFile</td>
+                <td>@file.TenFile</td>
+                <td>@file.LuuTru</td>
+                <td>@file.GhiChu</td>
+                <td class="btn-group">
+                    @Html.ActionLink("Tải file", "DownloadFile", new { maFile = file.MaFile }, new { @class = "btn btn-success btn-sm" }) |
+                  
+                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModalFileHopDong" data-delete-id="@file.MaFile"> Xoá</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!-- Modal Xoá quá trình -->
+<div class="modal fade" id="deleteModalFileHopDong" tabindex="-1" role="dialog" aria-labelledby="deleteFileHopDongModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteQuaTrinhModalLabel">Xác Nhận Xoá File hợp đồng!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xoá file này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <form id="deleteForm" action="" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" id="deleteIdFileHopDong" />
+                    <button type="submit" class="btn btn-danger" id="btn-delete-modal">Xoá</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // Sự kiện khi nút "Xoá" được bấm
+    $('#deleteModalFileHopDong').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Nút "Xoá" được bấm
+        var deleteId = button.data('delete-id'); // Lấy mã phòng ban cần xoá từ thuộc tính data-delete-id
+
+        // Gán mã phòng ban vào trường ẩn trong modal xoá
+        $('#deleteIdFileHopDong').val(deleteId);
+    });
+
+    // Sự kiện khi nút "Xoá" trong modal được bấm
+    $('#btn-delete-modal').click(function (event) {
+        event.preventDefault(); // Ngăn chặn hành động mặc định của form
+
+        // Lấy mã phòng ban cần xoá từ trường ẩn trong modal
+        var deleteIdFileHopDong = $('#deleteIdFileHopDong').val();
+
+        // Gửi yêu cầu xoá thông qua Ajax
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("DeleteConfirmedFileHopDong", "HopDong")" + '/' + deleteIdFileHopDong, // Tạo URL cho việc xoá
+            data: {
+                __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val()
+            }, // Cần gửi Token chống CSRF nếu sử dụng AntiForgeryToken
+            success: function (response) {
+                if (response.success) {
+                    // Hiển thị thông báo thành công
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Xoá thành công!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    // Đóng modal sau khi xoá thành công
+                    $('#deleteModalFileHopDong').modal('hide');
+
+                    // Tải lại bảng dữ liệu sau khi xoá
+                    loadFileHopDongList();
+                } else {
+                    // Xử lý lỗi nếu có
+                    console.error("Lỗi khi xoá", response.message);
+                }
+            },
+            error: function (error) {
+                // Xử lý lỗi nếu có
+                console.error("Lỗi khi xoá", error);
+            }
+        });
+    });
+</script>

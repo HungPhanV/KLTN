@@ -1,0 +1,446 @@
+﻿@model IEnumerable<DemoApp.Entities.QuaTrinh>
+@using DemoApp.Entities;
+<h3 class="qua-trinh-title mt-4 text-center">Danh sách quá trình làm việc</h3>
+<table class="table table-condensed mt-4">
+    <thead>
+        <tr>
+            <th>Phòng ban</th>
+            <th>Chức vụ</th>
+            <th>Vị trí</th>
+            <th>Thời gian bắt đầu</th>
+            <th>Thời gian kết thúc</th>
+            <th>Trạng thái</th>
+            <th class="text-center">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var quaTrinh in Model)
+        {
+            <tr>
+                <td class="hidden">
+                    @quaTrinh.ID
+                </td>
+                <td class="hidden">
+                    @quaTrinh.MaNV
+                </td>
+                <td data-phongban="@quaTrinh.MaPB">
+                    @{
+                        var maPB = quaTrinh.MaPB;
+                        var danhSachPhongBan = ViewBag.DanhSachPhongBan as List<DemoApp.Entities.PhongBan>;
+
+                        if (danhSachPhongBan != null)
+                        {
+                            var phongBan = danhSachPhongBan.FirstOrDefault(pb => pb.MaPB == maPB);
+
+                            if (phongBan != null)
+                            {
+                                @phongBan.TenPB
+                            }
+                            else
+                            {
+                                @("Phòng ban không xác định")
+                            }
+                        }
+                        else
+                        {
+                            @("Danh sách phòng ban không có")
+                        }
+                    }
+                </td>
+                <td data-chucvu="@quaTrinh.MaCV">
+                    @{
+                        var maCV = quaTrinh.MaCV;
+                        var danhSachChucVu = ViewBag.DanhSachChucVu as List<DemoApp.Entities.ChucVu>;
+
+                        if (danhSachChucVu != null)
+                        {
+                            var chucVu = danhSachChucVu.FirstOrDefault(cv => cv.MaCV == maCV);
+
+                            if (chucVu != null)
+                            {
+                                @chucVu.TenCV
+                            }
+                            else
+                            {
+                                @("Chức vụ không xác định")
+                            }
+                        }
+                        else
+                        {
+                            @("Danh sách chức vụ không có")
+                        }
+                    }
+                </td>
+                <td data-vitri="@quaTrinh.MaVT">
+                    @{
+                        var maVT = quaTrinh.MaVT;
+                        var danhSachViTri = ViewBag.DanhSachViTri as List<DemoApp.Entities.ViTri>;
+
+                        if (danhSachViTri != null)
+                        {
+                            var viTri = danhSachViTri.FirstOrDefault(vt => vt.MaVT == maVT);
+
+                            if (viTri != null)
+                            {
+                                @viTri.TenVT
+                            }
+                            else
+                            {
+                                @("Chức vụ không xác định")
+                            }
+                        }
+                        else
+                        {
+                            @("Danh sách chức vụ không có")
+                        }
+                    }
+                </td>
+
+                <td>
+                    @if (quaTrinh.ThoiGianBatDau.HasValue)
+                    {
+                        @quaTrinh.ThoiGianBatDau.Value.ToString("dd/MM/yyyy")
+                    }
+                    else
+                    {
+                        @("Không có") // Hoặc thông báo khác nếu không có giá trị
+                    }
+                </td>
+                <td>
+                    @if (quaTrinh.ThoiGianKetThuc.HasValue)
+                    {
+                        @quaTrinh.ThoiGianKetThuc.Value.ToString("dd/MM/yyyy")
+                    }
+                    else
+                    {@("Không có")}
+                </td>
+                <td class="trangthai">
+                    @quaTrinh.TrangThai
+                </td>
+                <td class="btn-group">
+                    <button class="btn btn-warning btn-sm editQuaTrinhButton text-white" data-toggle="modal" data-target="#editQuaTrinhModal" data-id="@quaTrinh.ID"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</button> |
+                    <button class="btn btn-danger btn-sm deleteQuaTrinhButton" data-toggle="modal" data-target="#deleteModalQuaTrinh" data-delete-quatrinh-id="@quaTrinh.ID"><i class="fa fa-trash" aria-hidden="true"></i> Xoá</button>
+                </td>
+            </tr>
+
+
+                        }
+    </tbody>
+</table>
+<!--Model sửa-->
+<div class="modal fade" id="editQuaTrinhModal" tabindex="-1" role="dialog" aria-labelledby="editQuaTrinhModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editQuaTrinhModalLabel">Sửa Quá Trình Làm Việc</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editQuaTrinhForm">
+
+                    <div class="form-group">
+                        <label for="editPhongBan">Phòng ban:</label>
+                        <select class="form-control" id="editPhongBan">
+                            @foreach (var phongBan in ViewBag.DanhSachPhongBan)
+                            {
+
+                                <option value="@phongBan.MaPB">@phongBan.TenPB</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editChucVu">Chức vụ:</label>
+                        <select class="form-control" id="editChucVu">
+                            @foreach (var chucVu in ViewBag.DanhSachChucVu)
+                            {
+
+                                <option value="@chucVu.MaCV">@chucVu.TenCV</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editViTri">Vị trí:</label>
+                        <select class="form-control" id="editViTri">
+                            @foreach (var viTri in ViewBag.DanhSachViTri)
+                            {
+
+                                <option value="@viTri.MaVT">@viTri.TenVT</option>
+                            }
+                        </select>
+                    </div>
+
+                        <div class="form-group">
+                        <label for="editThoiGianBatDau">Thời Gian Bắt Đầu:</label>
+                        <input type="text" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="editThoiGianBatDau">
+                    </div>
+                    <div class="form-group">
+                        <label for="editThoiGianKetThuc">Thời Gian Kết Thúc:</label>
+                        <input type="text" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="editThoiGianKetThuc">
+                    </div>
+                    <div class="form-group">
+                        <label for="editTrangThai">Trạng thái:</label>
+                        <select class="form-control" id="editTrangThai" name="trangThai">
+                            <option value="Kiêm nhiệm">Kiêm nhiệm</option>
+                            <option value="Chính thức">Chính thức</option>
+                            <option value="Đã nghỉ">Đã nghỉ</option>
+                        </select>
+                    </div>
+                    <input type="hidden" id="editQuaTrinhID">
+                    <input type="hidden" id="editMaNV">
+                    <button type="submit" class="btn btn-success float-right">Lưu Thay Đổi</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Xoá quá trình -->
+<div class="modal fade" id="deleteModalQuaTrinh" tabindex="-1" role="dialog" aria-labelledby="deleteQuaTrinhModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteQuaTrinhModalLabel">Xác Nhận Xoá Quá Trình Làm Việc</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xoá quá trình làm việc này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <form id="deleteForm" action="" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" id="deleteQuaTrinhId" />
+                    <button type="submit" class="btn btn-danger" id="btn-delete-quaTrinh-modal">Xoá</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        // Lặp qua từng ô trong cột Trạng thái
+        $(".trangthai").each(function () {
+            // Lấy nội dung của ô
+            var trangThai = $(this).text().trim();
+
+            // Kiểm tra trạng thái và thay đổi màu sắc tương ứng
+            if (trangThai === "Chính thức") {
+                $(this).css({
+                    "color": "red", // Đổi màu chữ thành màu vàng
+                    "font-weight": "bold" // Thêm font đậm
+                });
+            } else if (trangThai === "Kiêm nhiệm") {
+                $(this).css({
+                    "color": "yellow", // Đổi màu chữ thành màu vàng
+                    "font-weight": "bold" // Thêm font đậm
+                });
+            }
+            else if (trangThai === "Đã nghỉ") {
+                $(this).css({
+                    "color": "grey", // Đổi màu chữ thành màu vàng
+                    "font-weight": "bold" // Thêm font đậm
+                });
+            }
+        });
+    });
+
+    // Sự kiện khi nút "Xoá" được bấm
+    $('#deleteModalQuaTrinh').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Nút "Xoá" được bấm
+        var deleteQuaTrinhId = button.data('delete-quatrinh-id'); // Lấy mã phòng ban cần xoá từ thuộc tính data-delete-id
+
+        // Gán mã phòng ban vào trường ẩn trong modal xoá
+        $('#deleteQuaTrinhId').val(deleteQuaTrinhId);
+    });
+
+    // Sự kiện khi nút "Xoá" trong modal được bấm
+    $('#btn-delete-quaTrinh-modal').click(function (event) {
+        event.preventDefault(); // Ngăn chặn hành động mặc định của form
+
+        // Lấy mã phòng ban cần xoá từ trường ẩn trong modal
+        var deleteId = $('#deleteQuaTrinhId').val();
+
+        // Gửi yêu cầu xoá thông qua Ajax
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("DeleteConfirmed", "QuaTrinh")" + '/' + deleteId, // Tạo URL cho việc xoá
+            data: {
+                __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val()
+            }, // Cần gửi Token chống CSRF nếu sử dụng AntiForgeryToken
+            success: function (response) {
+                if (response.success) {
+                    // Hiển thị thông báo thành công
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Xoá thành công!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    // Đóng modal sau khi xoá thành công
+                    $('#deleteModalQuaTrinh').modal('hide');
+
+                    // Tải lại bảng dữ liệu sau khi xoá
+                    loadTableDataQuaTrinh();
+                } else {
+                    // Xử lý lỗi nếu có
+                    console.error("Lỗi khi xoá nhân viên:", response.message);
+                }
+            },
+            error: function (error) {
+                // Xử lý lỗi nếu có
+                console.error("Lỗi khi xoá nhân viên:", error);
+            }
+        });
+    });
+
+    // Sự kiện khi nút "Sửa" được bấm
+    $('.editQuaTrinhButton').click(function () {
+        var row = $(this).closest('tr');
+        var quaTrinhID = row.find('td:eq(0)').text().trim(); // Lấy ID từ cột ẩn
+        var maNV = row.find('td:eq(1)').text().trim(); // Lấy mã nhân viên
+        var maPB = row.find('td:eq(2)').data('phongban');
+        var maCV = row.find('td:eq(3)').data('chucvu');
+        var maVT = row.find('td:eq(4)').data('vitri');
+        var thoiGianBatDau = row.find('td:eq(5)').text();
+        var thoiGianKetThuc = row.find('td:eq(6)').text();
+        var trangThai = row.find('td:eq(7)').text().trim();
+
+        // Đưa thông tin vào modal
+        $('#editQuaTrinhID').val(quaTrinhID);
+        $('#editPhongBan').val(maPB);
+        $('#editChucVu').val(maCV);
+        $('#editViTri').val(maVT);
+        $('#editMaNV').val(maNV);
+        $('#editThoiGianBatDau').val(thoiGianBatDau);
+        $('#editThoiGianKetThuc').val(thoiGianKetThuc);
+        $('#editTrangThai').val(trangThai);
+        // Hiển thị modal
+        $('#editQuaTrinhModal').modal('show');
+    });
+
+    // Biến để theo dõi trạng thái "Chính thức"
+    var chinhThucExists = false;
+    // Sự kiện khi form sửa thông tin quá trình được submit
+    $('#editQuaTrinhForm').submit(function (event) {
+        event.preventDefault(); // Ngăn chặn form gửi thông tin một cách truyền thống
+
+        // Lấy thông tin từ form
+        var quaTrinhID = $('#editQuaTrinhID').val();
+        var maNV = $('#editMaNV').val();
+        var maPBQuaTrinh = $('#editPhongBan').val();
+        var maCVQuaTrinh = $('#editChucVu').val();
+        var maVTQuaTrinh = $('#editViTri').val();
+        var thoiGianBatDauEdit = $('#editThoiGianBatDau').val();
+        var thoiGianKetThucEdit = $('#editThoiGianKetThuc').val();
+        var trangThai = $('#editTrangThai').val();
+        if (thoiGianKetThucEdit.trim() === "Không có") {
+            thoiGianKetThucEdit = "";
+        }
+        var chinhThucCount = 0;
+
+        // Duyệt qua danh sách trạng thái và chỉ đếm trạng thái "Chính thức"
+        $(".trangthai").each(function () {
+            var trangThai = $(this).text().trim();
+
+            if (trangThai === "Chính thức") {
+                chinhThucCount++;
+            }
+        });
+        console.log(chinhThucCount);
+        if (chinhThucCount >1 && trangThai == "Chính thức") {
+            // Hiển thị thông báo lỗi nếu có nhiều hơn một trạng thái "Chính thức"
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi',
+                text: 'Chỉ có 1 trạng thái "Chính thức" được phép!',
+            });
+        }
+        if (thoiGianBatDau === "") {
+            // Hiển thị thông báo lỗi
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi',
+                text: 'Vui lòng chọn thời gian bắt đầu.',
+            });
+            return; // Ngăn chặn tiếp tục thực hiện AJAX nếu có lỗi
+        }
+        if (thoiGianKetThucEdit !== "") {
+            // Convert date strings to ISO 8601 format
+            var thoiGianBatDauEditISO = thoiGianBatDauEdit.substring(6, 10) + "-" + thoiGianBatDauEdit.substring(3, 5) + "-" + thoiGianBatDauEdit.substring(0, 2);
+            var thoiGianKetThucEditISO = thoiGianKetThucEdit.substring(6, 10) + "-" + thoiGianKetThucEdit.substring(3, 5) + "-" + thoiGianKetThucEdit.substring(0, 2);
+
+            if (thoiGianBatDauEditISO > thoiGianKetThucEditISO) {
+                // Display an error message
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi',
+                    text: 'Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc.',
+                });
+                return; // Prevent further processing if there is an error
+            }
+            var formattedThoiGianKetThucEdit = textToDate(thoiGianKetThucEdit).toISOString().substring(0, 10);
+        }
+
+        // Chuyển đổi thành chuỗi "yyyy-MM-dd" cho input type="date"
+
+        var formattedThoiGianBatDauEdit = textToDate(thoiGianBatDauEdit).toISOString().substring(0, 10);
+
+
+
+        // Gửi dữ liệu thông qua AJAX
+        $.ajax({
+            type: "POST",
+            url: "/QuaTrinh/Update", // Đặt URL cập nhật quá trình tại đây
+            data: {
+                quaTrinhID: quaTrinhID,
+                maNV: maNV,
+                maPBQuaTrinh: maPBQuaTrinh,
+                maCVQuaTrinh: maCVQuaTrinh,
+                maVTQuaTrinh: maVTQuaTrinh,
+                thoiGianBatDau: formattedThoiGianBatDauEdit,
+                thoiGianKetThuc: formattedThoiGianKetThucEdit,
+                trangThai: trangThai
+            },
+            success: function (response) {
+                if (response.success) {
+                    // Hiển thị thông báo thành công
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Cập nhật thành công!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    // Đóng modal sau khi sửa thành công
+                    $('#editQuaTrinhModal').modal('hide');
+
+                    // Tải lại bảng dữ liệu sau khi xoá
+                    loadTableDataQuaTrinh();
+                } else {
+                    // Xử lý lỗi nếu có
+                    // Hiển thị thông báo thành công
+                    Swal.fire({
+                        icon: 'fail',
+                        title: 'Cập nhật thất bại!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            },
+            error: function (error) {
+                // Xử lý lỗi AJAX nếu có
+                console.error('Lỗi AJAX: ' + JSON.stringify(error));
+            }
+        });
+    });
+
+
+
+</script>

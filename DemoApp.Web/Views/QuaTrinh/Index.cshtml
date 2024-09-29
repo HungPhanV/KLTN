@@ -1,0 +1,38 @@
+﻿@model IEnumerable<DemoApp.Entities.QuaTrinh>
+@using DemoApp.Entities;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Quá trình làm việc</h2>
+<style>
+
+    /* CSS cho container chứa nút */
+    .btn-group {
+        display: flex;
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        gap: 10px; /* Khoảng cách giữa các nút */
+    }
+</style>
+<div>
+    @Html.ActionLink("Thêm quá trình làm việc", "Create", "QuaTrinh", null, new { @class = "btn btn-success  mb-3" })
+</div>
+
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Tên nhân viên</th>
+            <th>Vị trí</th>
+            <th>Phòng ban</th>
+            <th>Thời gian bắt đầu</th>
+            <th>Thời gian kết thúc</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+    </tbody>
+</table>
+

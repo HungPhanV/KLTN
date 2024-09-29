@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FEAB8825-431A-44BA-AC8C-82062A8ED0AE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DemoApp.DataLayers</RootNamespace>
+    <AssemblyName>DemoApp.DataLayers</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IChamCongDAL.cs" />
+    <Compile Include="ILoaiCaLamDAL.cs" />
+    <Compile Include="ICaLamDAL.cs" />
+    <Compile Include="IChucVuDAL.cs" />
+    <Compile Include="IFileHopDongDAL.cs" />
+    <Compile Include="IHopDongLaoDongDAL.cs" />
+    <Compile Include="ILoaiHopDongDAL.cs" />
+    <Compile Include="ILoaiNghiPhepDAL.cs" />
+    <Compile Include="INghiPhepDAL.cs" />
+    <Compile Include="INhanVienDAL.cs" />
+    <Compile Include="IPhongBanDAL.cs" />
+    <Compile Include="IQuaTrinhDAL.cs" />
+    <Compile Include="IViTriDAL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlServer\ChamCongDAL.cs" />
+    <Compile Include="SqlServer\LoaiCaLamDAL.cs" />
+    <Compile Include="SqlServer\CaLamDAL.cs" />
+    <Compile Include="SqlServer\ChucVuDAL.cs" />
+    <Compile Include="SqlServer\CommandList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommandList.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ITaiKhoanDAL.cs" />
+    <Compile Include="SqlServer\FileHopDongDAL.cs" />
+    <Compile Include="SqlServer\HopDongLaoDongDAL.cs" />
+    <Compile Include="SqlServer\LoaiHopDongDAL.cs" />
+    <Compile Include="SqlServer\LoaiNghiPhepDAL.cs" />
+    <Compile Include="SqlServer\NghiPhepDAL.cs" />
+    <Compile Include="SqlServer\NhanVienDAL.cs" />
+    <Compile Include="SqlServer\PhongBanDAL.cs" />
+    <Compile Include="SqlServer\QuaTrinhDAL.cs" />
+    <Compile Include="SqlServer\TaiKhoanDAL.cs" />
+    <Compile Include="SqlServer\ViTriDAL.cs" />
+    <Compile Include="SqlServer\_BaseDAL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DemoApp.Entities\DemoApp.Entities.csproj">
+      <Project>{d8810792-109c-448f-a81f-b42f62f4956c}</Project>
+      <Name>DemoApp.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MsAccess\" />
+    <Folder Include="MySql\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlServer\CommandList.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommandList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,203 @@
+﻿@model IEnumerable<DemoApp.Entities.NghiPhep>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Danh sách đơn nghỉ phép</h2>
+<table class="table mt-5 table-condensed">
+    <tr>
+        <th>
+            Tên nhân viên
+        </th>
+        <th>
+            Ngày bắt đầu
+        </th>
+        <th>
+           Ngày kết thúc
+        </th>
+        <th>Tổng số ngày</th>
+        <th>
+          Loại nghỉ phép
+        </th>
+        <th>
+            Lý do bổ sung
+        </th>
+        <th>
+           Trạng thái
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td data-nhanvien="@item.MaNV">
+            @{
+                var maNV = item.MaNV;
+                var danhSachNhanVien = ViewBag.DanhSachNhanVien as List<DemoApp.Entities.NhanVien>;
+
+                if (danhSachNhanVien != null)
+                {
+                    var nhanVien = danhSachNhanVien.FirstOrDefault(nv => nv.MaNV == maNV);
+
+                    if (nhanVien != null)
+                    {
+                        @nhanVien.HoTen
+                    }
+                    else
+                    {
+                        @("Không có")
+                    }
+                }
+                else
+                {
+                    @("Danh sách phòng ban không có")
+                }
+            }
+        </td>
+
+        <td>
+            @item.NgayBatDau.ToString("dd/MM/yyyy")
+        </td>
+        <td>
+            @item.NgayKetThuc.ToString("dd/MM/yyyy")
+        </td>
+        <td>
+            @((item.NgayKetThuc - item.NgayBatDau).Days + 1) ngày
+        </td>
+        <td data-phongban="@item.MaLoaiNghiPhep">
+            @{
+                var maLoaiNP = item.MaLoaiNghiPhep;
+                var danhSachLoaiNghiPhep = ViewBag.DanhSachLoaiNghiPhep as List<DemoApp.Entities.LoaiNghiPhep>;
+
+                if (danhSachLoaiNghiPhep != null)
+                {
+                    var loaiNghiPhep = danhSachLoaiNghiPhep.FirstOrDefault(lnp => lnp.MaLoaiNghiPhep == maLoaiNP);
+
+                    if (loaiNghiPhep != null)
+                    {
+                        @loaiNghiPhep.TenLoai
+                    }
+               
+                }
+              
+            }
+        </td>
+
+        <td>
+           @Html.DisplayFor(modelItem => item.LyDoBoSung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrangThai)
+        </td>
+        <td class="btn-group">
+@if (item.TrangThai == "Đang chờ")
+{
+            <a href="#" class="btn-success btn-sm btn text-light" data-id="@item.ID">Phê duyệt</a>
+            <a href="#" class="btn-danger btn-sm btn text-light" data-id="@item.ID">Huỷ bỏ</a>
+}
+         </td>
+
+    </tr>
+}
+
+</table>
+<script>
+   
+    // Lấy danh sách tất cả các phần tử td
+    var tds = document.getElementsByTagName("td");
+
+    // Lặp qua từng phần tử để xác định trạng thái và thay đổi màu sắc tương ứng
+    for (var i = 0; i < tds.length; i++) {
+        var trangThai = tds[i].innerText.trim(); // Lấy giá trị trạng thái từ innerText của phần tử
+
+        // Kiểm tra giá trị trạng thái và đổi màu sắc tương ứng
+        switch (trangThai) {
+            case "Đang chờ":
+                tds[i].style.color = "yellow";
+                tds[i].style.fontWeight = "bold";
+                break;
+            case "Đã phê duyệt":
+                tds[i].style.color = "green";
+                tds[i].style.fontWeight = "bold";
+                break;
+            case "Huỷ bỏ":
+                tds[i].style.color = "red";
+                tds[i].style.fontWeight = "bold";
+                break;
+            // Thêm các trạng thái và màu sắc khác nếu cần thiết
+            default:
+                // Màu mặc định hoặc xử lý khác nếu giá trị trạng thái không khớp với các trường hợp trên
+                break;
+        }
+    }
+
+
+    $(document).ready(function () {
+        $(".btn-success").click(function (e) {
+            e.preventDefault(); // Ngăn chặn hành động mặc định của nút
+
+            var id = $(this).data('id');
+            $.ajax({
+                url: '@Url.Action("UpdateTrangThai", "NghiPhep")',
+                type: 'POST',
+                data: { id: id, trangThai: 'Đã phê duyệt' },
+                success: function (data) {
+                    if (data.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Phê duyệt thành công!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1500);
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi!',
+                            text: 'Không thể phê duyệt đơn này.',
+                            confirmButtonText: 'Đóng'
+                        });
+                    }
+                }
+            });
+        });
+    });
+
+
+    $(document).ready(function () {
+        $(".btn-danger").click(function (e) {
+            e.preventDefault(); // Ngăn chặn hành động mặc định của nút
+
+            var id = $(this).data('id');
+            $.ajax({
+                url: '@Url.Action("UpdateTrangThai", "NghiPhep")',
+                type: 'POST',
+                data: { id: id, trangThai: 'Huỷ bỏ' },
+                success: function (data) {
+                    if (data.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Huỷ bỏ thành công!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1500);
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi!',
+                            text: 'Không thể phê duyệt đơn này.',
+                            confirmButtonText: 'Đóng'
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>

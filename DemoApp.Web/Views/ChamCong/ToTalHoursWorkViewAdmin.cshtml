@@ -1,0 +1,153 @@
+﻿@model DemoApp.Web.Models.TongHopChamCongModel
+    @using DemoApp.Entities;
+@{
+    ViewBag.Title = "TotalHoursWorkView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    // Tạo một dictionary để lưu trữ tổng số giờ làm của từng nhân viên
+    Dictionary<string, Dictionary<int, int>> hoursPerEmployeePerDay = new Dictionary<string, Dictionary<int, int>>();
+
+    // Tính tổng số giờ làm của từng nhân viên theo từng ngày trong tháng
+    foreach (var item in Model.TongHopChamCongTheoThang)
+    {
+        if (!hoursPerEmployeePerDay.ContainsKey(item.HoTen))
+        {
+            hoursPerEmployeePerDay[item.HoTen] = new Dictionary<int, int>();
+        }
+
+        // Trong trường hợp dữ liệu làm việc của ngày hiện tại đã được thêm vào
+        if (hoursPerEmployeePerDay[item.HoTen].ContainsKey(item.NgayBatDau.Day))
+        {
+            hoursPerEmployeePerDay[item.HoTen][item.NgayBatDau.Day] += item.SoGioLam;
+        }
+        else
+        {
+            hoursPerEmployeePerDay[item.HoTen][item.NgayBatDau.Day] = item.SoGioLam;
+        }
+    }
+    
+
+}
+
+<h2 class="text-center mb-3">Tổng giờ làm của nhân viên</h2>
+@using (Html.BeginForm("TotalHoursByMonth", "ChamCong", FormMethod.Get))
+{
+    <label for="month">Chọn tháng:</label>
+    <input type="month" id="month" name="month" required>
+    <button type="submit" class="btn btn-primary btn-sm mb-1">Xem tổng giờ làm</button>
+}
+
+<div class="table-wrapper">
+    <table class="table-bordered table mt-3">
+        <thead class="text-center">
+            <tr>
+                <th rowspan="2">STT</th>
+                <th rowspan="2">Họ và Tên</th>
+                <th class="text-center" colspan="31">Ngày trong tháng</th>
+                <th rowspan="2">Ngày nghỉ có lương (giờ)</th>
+                <th rowspan="2">Tổng cộng (giờ)</th>
+                <th rowspan="2">Tổng lương (VNĐ)</th>
+
+            </tr>
+            <tr>
+                @for (int i = 1; i <= 31; i++)
+                {
+                    <th>@i</th>
+                }
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @{
+                int stt = 1;
+
+            }
+            @foreach (var entry in hoursPerEmployeePerDay)
+            {
+                <tr>
+                    <td>@stt</td>
+                    <td class="text-left">@entry.Key</td>
+                    @for (int i = 1; i <= 31; i++)
+                    {
+                        <td>
+                            @if (entry.Value.ContainsKey(i))
+                    {
+                                @entry.Value[i]
+                            }
+                        </td>
+                    }
+                    @{
+                       
+                        <td>2</td>
+                        <td>@entry.Value.Sum(x => x.Value)</td>
+                        int luong = entry.Value.Sum(x => x.Value)  * 45000;
+                        <td>@luong</td>
+                    }
+                </tr>
+                            stt++;
+                        }
+        </tbody>
+
+    </table>
+</div>
+<h2 class="text-center">Danh sách đơn nghỉ phép</h2>
+<table class="table mt-5 table-condensed">
+    <tr>
+        <th>
+            Mã nhân viên
+        </th>
+        <th>
+            Ngày bắt đầu
+        </th>
+        <th>
+            Ngày kết thúc
+        </th>
+        <th>Tổng số ngày</th>
+        <th>
+            Loại nghỉ phép
+        </th>
+        <th>
+            Lý do bổ sung
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model.ListNghiPhep)
+    {
+        <tr>
+            <td>
+                @item.MaNV
+            </td>
+
+            <td>
+                @item.NgayBatDau.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @item.NgayKetThuc.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @((item.NgayKetThuc - item.NgayBatDau).Days + 1) ngày
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaLoaiNghiPhep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LyDoBoSung)
+            </td>
+
+        </tr>
+                    }
+
+</table>
+
+<style>
+    .table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        white-space: nowrap; /* Ngăn chặn việc ngắt dòng trong cột */
+    }
+</style>

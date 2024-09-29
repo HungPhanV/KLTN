@@ -1,0 +1,389 @@
+﻿@model IEnumerable<DemoApp.Entities.PhongBan>
+@using System.Linq;
+
+
+
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#createModal">
+    Tạo Phòng Ban Mới
+</button>
+<table id="phongBanTable" class="table table-condensed mt-4 myTable">
+    <thead >
+        <tr>
+            <th width="15%" scope="col">Tên phòng ban</th>
+            <th width="20%" scope="col">Địa chỉ</th>
+            <th width="10%" scope="col">Số điện thoại</th>
+            <th width="10%" scope="col" class="text-center">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody id="phongBanTableBody">
+        @foreach (var parentPhongBan in Model.Where(x => x.MaPBParent == 0)) // ==0 vì đây là điều kiện của phòng ban cha
+        {
+            <tr class="parent-row" data-has-children="true" data-parent-id="@parentPhongBan.MaPB" data-id="@parentPhongBan.MaPB">
+                <td class="hidden">@Html.DisplayFor(modelItem => parentPhongBan.MaPB)</td>
+                <td><span class="toggle-arrow">▼</span>@Html.DisplayFor(modelItem => parentPhongBan.TenPB)</td>
+                <td>@Html.DisplayFor(modelItem => parentPhongBan.DiaChi)</td>
+                <td>@Html.DisplayFor(modelItem => parentPhongBan.SDTPB)</td>
+                <td style="display:none;">@Html.DisplayFor(modelItem => parentPhongBan.MaPBParent)</td>
+                <td>
+                    <div class="btn-group">
+                        <button class="btn btn-warning btn-sm editPhongBanButton text-light" data-toggle="modal" data-target="#editPhongBanModal"><i class="fa fa-wrench" aria-hidden="true"></i> Cập nhật</button>
+                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-delete-id="@parentPhongBan.MaPB" data-parent-id="@parentPhongBan.MaPB" data-delete-type="parent"><i class="fa fa-trash" aria-hidden="true"></i> Xoá</button>
+                    </div>
+                </td>
+            </tr>
+
+            // Hiển thị phòng ban con nếu có
+            var childPhongBans = Model.Where(x => x.MaPBParent == parentPhongBan.MaPB).ToList(); // so sánh với Mã PB ở cha
+            foreach (var child in childPhongBans)
+            {
+                <tr class="child-row">
+                    <td class="hidden">@Html.DisplayFor(modelItem => child.MaPB)</td>
+                    <td>@Html.DisplayFor(modelItem => child.TenPB)</td>
+                    <td>@Html.DisplayFor(modelItem => child.DiaChi)</td>
+                    <td width="10%">@Html.DisplayFor(modelItem => child.SDTPB)</td>
+                    <td style="display:none;">@Html.DisplayFor(modelItem => child.MaPBParent)</td>
+                    <td class="btn-group">
+                        <button class="btn btn-success editPhongBanButton btn-sm" data-toggle="modal" data-target="#editPhongBanModal"><i class="fa fa-wrench" aria-hidden="true"></i> Cập nhật</button>         
+                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-delete-id="@child.MaPB"><i class="fa fa-trash" aria-hidden="true"></i> Xoá</button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Xác nhận xoá</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xoá <span id="deleteConfirmationText">phòng ban này</span> không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <form id="deleteForm" action="" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" id="deleteId" />
+                    <button type="submit" class="btn btn-danger" id="btn-delete-modal">Xoá</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- The Modal -->
+<div class="modal fade" id="createModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Tạo Phòng Ban Mới</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <!-- Form để nhập thông tin mới -->
+                <form id="createPhongBanForm">
+                    <div class="form-group">
+                        <label for="tenPhongBan">Tên Phòng Ban:</label>
+                        <input type="text" class="form-control" id="tenPhongBan" name="tenPhongBan">
+                    </div>
+                    <div class="form-group">
+                        <label for="diaChi">Địa Chỉ:</label>
+                        <input type="text" class="form-control" id="diaChi" name="diaChi">
+                    </div>
+                    <div class="form-group">
+                        <label for="soDienThoai">Số Điện Thoại:</label>
+                        <input type="text" class="form-control" id="soDienThoai" name="soDienThoai">
+                    </div>
+                    <div class="form-group">
+                        <label for="maPBParent">Mã phòng ban cha:</label>
+                        @Html.DropDownList("maPBParent", new SelectList(ViewBag.DanhSachPhongBan, "MaPB", "TenPB"), "Không có", new { @class = "form-control" })
+                    </div>
+
+                    <button type="submit" class="btn btn-success float-right">Tạo phòng ban</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="editPhongBanModal" tabindex="-1" role="dialog" aria-labelledby="editPhongBanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editPhongBanModalLabel">Sửa Thông Tin Phòng Ban</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editPhongBanForm">
+                    <!-- Sử dụng id thay vì name cho các trường nhập liệu -->
+                    <div class="form-group">
+                        <label for="editTenPB">Tên Phòng Ban:</label>
+                        <input type="text" class="form-control" id="editTenPB">
+                    </div>
+                    <div class="form-group">
+                        <label for="editDiaChi">Địa Chỉ:</label>
+                        <input type="text" class="form-control" id="editDiaChi">
+                    </div>
+                    <div class="form-group">
+                        <label for="editSDT">Số điện thoại:</label>
+                        <input type="text" class="form-control" id="editSDT">
+                    </div>
+                    <div class="form-group">
+                        <label for="editMaPBParent">Mã phòng ban cha:</label>
+                        <select class="form-control" id="editMaPBParent">
+                            <option value="0">Không có</option>
+                            @foreach (var phongBan in ViewBag.DanhSachPhongBan)
+                            {
+                                
+                                <option value="@phongBan.MaPB">@phongBan.TenPB</option>
+                            }
+                        </select>
+                    </div>
+
+                    <input type="hidden" id="editMaPB"> <!-- Thêm trường ẩn cho mã phòng ban -->
+                    <button type="submit" class="btn btn-success float-right">Lưu Thay Đổi</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+
+
+
+
+    // Đảm bảo rằng mã JavaScript chỉ chạy sau khi trang đã được nạp hoàn toàn
+    $(document).ready(function () {
+        // Thêm sự kiện click cho hàng cha có phòng ban con
+        $('.parent-row[data-has-children="true"]').click(function () {
+            // Tìm tất cả các hàng con của hàng cha được bấm
+            var childrenRows = $(this).nextUntil('.parent-row');
+
+            // Kiểm tra trạng tháng của hàng cha (có thể dùng thuộc tính data)
+            var isOpen = $(this).data('isOpen') || false;
+
+            // Kiểm tra nếu các hàng con đang ẩn, thì hiển thị, ngược lại ẩn đi
+            if (!isOpen) {
+                $(this).find('.toggle-arrow').text('▲'); // Thay đổi biểu tượng mũi tên thành lên
+                childrenRows.show();
+            } else {
+                $(this).find('.toggle-arrow').text('▼'); // Thay đổi biểu tượng mũi tên thành xuống
+                childrenRows.hide();
+            }
+
+            // Cập nhật trạng thái của hàng cha
+            $(this).data('isOpen', !isOpen);
+        });
+
+
+
+        // Sự kiện khi nút "Xoá" được bấm
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Nút "Xoá" được bấm
+            var deleteId = button.data('delete-id'); // Lấy mã phòng ban cần xoá từ thuộc tính data-delete-id
+            var isParentRow = button.closest('tr').data('has-children'); // Kiểm tra xem dòng có thuộc loại "parent row" hay không
+
+            // Tùy chỉnh thông báo dựa vào loại dòng
+            if (isParentRow) {
+                $('#deleteConfirmationText').text('phòng ban này và các phòng ban con');
+            } else {
+                $('#deleteConfirmationText').text('phòng ban con này');
+            }
+
+            // Gán mã phòng ban vào trường ẩn trong modal xoá
+            $('#deleteId').val(deleteId);
+        });
+
+
+        // Sự kiện khi nút "Xoá" trong modal được bấm
+        $('#btn-delete-modal').click(function (event) {
+            event.preventDefault(); // Ngăn chặn hành động mặc định của form
+
+            // Lấy mã phòng ban cần xoá từ trường ẩn trong modal
+            var deleteId = $('#deleteId').val();
+
+            // Gửi yêu cầu xoá thông qua Ajax
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("DeleteConfirmed", "PhongBan")" + '/' + deleteId, // Tạo URL cho việc xoá
+                data: {
+                    __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val()
+                }, // Cần gửi Token chống CSRF nếu sử dụng AntiForgeryToken
+                success: function (response) {
+                    if (response.success) {
+                        // Hiển thị thông báo thành công
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Xoá thành công!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                        // Đóng modal sau khi xoá thành công
+                        $('#deleteModal').modal('hide');
+
+                        // Tải lại bảng dữ liệu sau khi xoá
+                        loadTableDataToSearch();
+                    } else {
+                        // Xử lý lỗi nếu có
+                        console.error("Lỗi khi xoá phòng ban:", response.message);
+                    }
+                },
+                error: function (error) {
+                    // Xử lý lỗi nếu có
+                    console.error("Lỗi khi xoá phòng ban:", error);
+                }
+            });
+        });
+
+
+        // Sự kiện khi nút "Tạo Phòng Ban Mới" được bấm
+        $("#createPhongBanForm").submit(function (event) {
+            event.preventDefault(); // Ngăn chặn form gửi thông tin một cách truyền thống
+
+            // Lấy thông tin từ form
+            var tenPhongBan = $("#tenPhongBan").val();
+            var diaChi = $("#diaChi").val();
+            var SDTPB = $("#soDienThoai").val();
+            var selectedOption = $("#maPBParent option:selected").text(); // Lấy giá trị của lựa chọn đã chọn
+
+            // Kiểm tra nếu lựa chọn là "Không có" thì gán maPBParent = 0
+            if (selectedOption === "Không có") {
+                maPBParent = 0;
+            } else {
+                maPBParent = $("#maPBParent").val();
+            }
+
+
+            // Gửi dữ liệu thông qua AJAX
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Create", "PhongBan")",
+                data: {
+                    TenPB: tenPhongBan,
+                    DiaChi: diaChi,
+                    SDTPB: SDTPB, // Đổi tên tham số này thành SDTPB
+                    MaPBParent: maPBParent
+                },
+                success: function (response) {
+                    if (response.success) {
+                        // Hiển thị thông báo thành công
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Tạo phòng ban thành công!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                        // Đóng popup sau khi thêm thành công
+                        $("#createModal").modal("hide");
+                        // Reset các trường thông tin trong modal
+                        $("#tenPhongBan").val("");
+                        $("#diaChi").val("");
+                        $("#soDienThoai").val("");
+                        $("#maPBParent").val(""); // Reset giá trị mã phòng ban cha
+                        loadTableDataToSearch();
+                    } else {
+                        // Xử lý lỗi nếu có
+                        console.error("Lỗi khi tạo phòng ban mới:", response.message);
+                    }
+                },
+                error: function (error) {
+                    // Xử lý lỗi nếu có
+                    console.error("Lỗi khi tạo phòng ban mới:", error);
+                }
+            });
+        });
+
+
+        // Sự kiện khi nút "Sửa" được bấm
+        $('.editPhongBanButton').click(function () {
+            // Lấy hàng chứa nút "Sửa" được bấm
+            var row = $(this).closest('tr');
+
+            // Lấy thông tin từ các ô trong hàng
+            var maPB = row.find('td:eq(0)').text(); // Lấy giá trị từ cột thứ 0
+            var tenPB = row.find('td:eq(1)').text(); // Lấy giá trị từ cột thứ 1
+            tenPB = tenPB.replace('▼', '').replace('▲', ''); // Xóa ký tự ▼ và ▲
+            var diaChi = row.find('td:eq(2)').text(); // Lấy giá trị từ cột thứ 2
+            var sdtPB = row.find('td:eq(3)').text(); // Lấy giá trị từ cột thứ 3
+            var maPBParent = row.find('td:eq(4)').text();
+
+            // Đưa thông tin vào modal
+            $('#editMaPB').val(maPB);
+            $('#editTenPB').val(tenPB);
+            $('#editDiaChi').val(diaChi);
+            $('#editSDT').val(sdtPB);
+            $('#editMaPBParent').val(maPBParent);
+
+            // Hiển thị modal
+            $('#editPhongBanModal').modal('show');
+        });
+
+        // Sự kiện khi nút "Lưu Thông Tin" trong modal chỉnh sửa được bấm
+        $("#editPhongBanForm").submit(function (event) {
+            event.preventDefault(); // Ngăn chặn form gửi thông tin một cách truyền thống
+
+            // Lấy thông tin từ form
+            var maPB = $("#editMaPB").val();
+            var tenPhongBan = $("#editTenPB").val();
+            var diaChi = $("#editDiaChi").val();
+            var SDTPB = $("#editSDT").val();
+            var maPBParent = $("#editMaPBParent").val();
+
+            // Gửi dữ liệu thông qua AJAX
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Update", "PhongBan")",
+                data: {
+                    id: maPB,
+                    TenPB: tenPhongBan,
+                    DiaChi: diaChi,
+                    SDTPB: SDTPB,
+                    MaPBParent: maPBParent
+                },
+                success: function (response) {
+                    if (response.success) {
+                        // Hiển thị thông báo thành công
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Cập nhật phòng ban thành công!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                        // Đóng popup sau khi sửa thành công
+                        $("#editPhongBanModal").modal("hide");
+
+                        // Không cần thay đổi biểu tượng toggle-arrow tại đây
+
+                        // Sau khi sửa thành công, tải lại chỉ bảng bằng AJAX
+                        loadTableDataToSearch();
+                    } else {
+                        // Xử lý lỗi nếu có
+                        console.error("Lỗi khi cập nhật phòng ban:", response.message);
+                    }
+                },
+                error: function (error) {
+                    // Xử lý lỗi nếu có
+                    console.error("Lỗi khi cập nhật phòng ban:", error);
+                }
+            });
+        });
+    });
+
+
+</script>

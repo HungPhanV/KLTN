@@ -1,0 +1,43 @@
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.DataLayers\bin\Debug\DemoApp.DataLayers.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.DataLayers\bin\Debug\DemoApp.DataLayers.pdb
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.DataLayers\bin\Debug\DemoApp.Entities.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.DataLayers\bin\Debug\DemoApp.Entities.pdb
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.csprojResolveAssemblyReference.cache
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.pdb
+I:\MyProjects\DemoApp\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.csprojResolveAssemblyReference.cache
+I:\MyProjects\DemoApp\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.SqlServer.CommandList.resources
+I:\MyProjects\DemoApp\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.csproj.GenerateResource.Cache
+I:\MyProjects\DemoApp\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.dll
+I:\MyProjects\DemoApp\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.pdb
+I:\MyProjects\DemoApp\DemoApp.DataLayers\bin\Debug\DemoApp.DataLayers.dll
+I:\MyProjects\DemoApp\DemoApp.DataLayers\bin\Debug\DemoApp.DataLayers.pdb
+I:\MyProjects\DemoApp\DemoApp.DataLayers\bin\Debug\DemoApp.Entities.dll
+I:\MyProjects\DemoApp\DemoApp.DataLayers\bin\Debug\DemoApp.Entities.pdb
+C:\Users\Admin\Downloads\DemoApp\DemoApp.DataLayers\bin\Debug\DemoApp.DataLayers.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.DataLayers\bin\Debug\DemoApp.DataLayers.pdb
+C:\Users\Admin\Downloads\DemoApp\DemoApp.DataLayers\bin\Debug\DemoApp.Entities.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.DataLayers\bin\Debug\DemoApp.Entities.pdb
+C:\Users\Admin\Downloads\DemoApp\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Downloads\DemoApp\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.SqlServer.CommandList.resources
+C:\Users\Admin\Downloads\DemoApp\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.csproj.GenerateResource.Cache
+C:\Users\Admin\Downloads\DemoApp\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.pdb
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.csprojResolveAssemblyReference.cache
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.SqlServer.CommandList.resources
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.csproj.GenerateResource.Cache
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.pdb
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.DataLayers\bin\Debug\DemoApp.DataLayers.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.DataLayers\bin\Debug\DemoApp.DataLayers.pdb
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.DataLayers\bin\Debug\DemoApp.Entities.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.DataLayers\bin\Debug\DemoApp.Entities.pdb
+D:\Project_ASP.NET\QLNS\DemoApp.DataLayers\bin\Debug\DemoApp.DataLayers.dll
+D:\Project_ASP.NET\QLNS\DemoApp.DataLayers\bin\Debug\DemoApp.DataLayers.pdb
+D:\Project_ASP.NET\QLNS\DemoApp.DataLayers\bin\Debug\DemoApp.Entities.dll
+D:\Project_ASP.NET\QLNS\DemoApp.DataLayers\bin\Debug\DemoApp.Entities.pdb
+D:\Project_ASP.NET\QLNS\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.csprojResolveAssemblyReference.cache
+D:\Project_ASP.NET\QLNS\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.SqlServer.CommandList.resources
+D:\Project_ASP.NET\QLNS\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.csproj.GenerateResource.Cache
+D:\Project_ASP.NET\QLNS\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.dll
+D:\Project_ASP.NET\QLNS\DemoApp.DataLayers\obj\Debug\DemoApp.DataLayers.pdb

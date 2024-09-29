@@ -1,0 +1,45 @@
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.csprojResolveAssemblyReference.cache
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.BussinessLayers\bin\Debug\DemoApp.BussinessLayers.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.BussinessLayers\bin\Debug\DemoApp.BussinessLayers.pdb
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.BussinessLayers\bin\Debug\DemoApp.DataLayers.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.BussinessLayers\bin\Debug\DemoApp.Entities.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.BussinessLayers\bin\Debug\DemoApp.DataLayers.pdb
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.BussinessLayers\bin\Debug\DemoApp.Entities.pdb
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.pdb
+I:\MyProjects\DemoApp\DemoApp.BussinessLayers\bin\Debug\DemoApp.BussinessLayers.dll
+I:\MyProjects\DemoApp\DemoApp.BussinessLayers\bin\Debug\DemoApp.BussinessLayers.pdb
+I:\MyProjects\DemoApp\DemoApp.BussinessLayers\bin\Debug\DemoApp.DataLayers.dll
+I:\MyProjects\DemoApp\DemoApp.BussinessLayers\bin\Debug\DemoApp.Entities.dll
+I:\MyProjects\DemoApp\DemoApp.BussinessLayers\bin\Debug\DemoApp.DataLayers.pdb
+I:\MyProjects\DemoApp\DemoApp.BussinessLayers\bin\Debug\DemoApp.Entities.pdb
+I:\MyProjects\DemoApp\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.csprojResolveAssemblyReference.cache
+I:\MyProjects\DemoApp\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.dll
+I:\MyProjects\DemoApp\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.pdb
+C:\Users\Admin\Downloads\DemoApp\DemoApp.BussinessLayers\bin\Debug\DemoApp.BussinessLayers.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.BussinessLayers\bin\Debug\DemoApp.BussinessLayers.pdb
+C:\Users\Admin\Downloads\DemoApp\DemoApp.BussinessLayers\bin\Debug\DemoApp.DataLayers.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.BussinessLayers\bin\Debug\DemoApp.Entities.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.BussinessLayers\bin\Debug\DemoApp.DataLayers.pdb
+C:\Users\Admin\Downloads\DemoApp\DemoApp.BussinessLayers\bin\Debug\DemoApp.Entities.pdb
+C:\Users\Admin\Downloads\DemoApp\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Downloads\DemoApp\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.pdb
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.BussinessLayers\bin\Debug\DemoApp.BussinessLayers.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.BussinessLayers\bin\Debug\DemoApp.BussinessLayers.pdb
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.BussinessLayers\bin\Debug\DemoApp.DataLayers.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.BussinessLayers\bin\Debug\DemoApp.Entities.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.BussinessLayers\bin\Debug\DemoApp.DataLayers.pdb
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.BussinessLayers\bin\Debug\DemoApp.Entities.pdb
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.csprojResolveAssemblyReference.cache
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.pdb
+D:\Project_ASP.NET\QLNS\DemoApp.BussinessLayers\bin\Debug\DemoApp.BussinessLayers.dll
+D:\Project_ASP.NET\QLNS\DemoApp.BussinessLayers\bin\Debug\DemoApp.BussinessLayers.pdb
+D:\Project_ASP.NET\QLNS\DemoApp.BussinessLayers\bin\Debug\DemoApp.DataLayers.dll
+D:\Project_ASP.NET\QLNS\DemoApp.BussinessLayers\bin\Debug\DemoApp.Entities.dll
+D:\Project_ASP.NET\QLNS\DemoApp.BussinessLayers\bin\Debug\DemoApp.DataLayers.pdb
+D:\Project_ASP.NET\QLNS\DemoApp.BussinessLayers\bin\Debug\DemoApp.Entities.pdb
+D:\Project_ASP.NET\QLNS\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.csprojResolveAssemblyReference.cache
+D:\Project_ASP.NET\QLNS\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.dll
+D:\Project_ASP.NET\QLNS\DemoApp.BussinessLayers\obj\Debug\DemoApp.BussinessLayers.pdb

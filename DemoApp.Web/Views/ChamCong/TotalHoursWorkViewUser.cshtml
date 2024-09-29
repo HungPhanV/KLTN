@@ -1,0 +1,35 @@
+﻿@model IEnumerable<DemoApp.Entities.ChamCong>
+@{
+    ViewBag.Title = "TotalHoursWorkView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="text-center mb-5">Số giờ làm theo ngày</h2>
+
+<table class="table-condensed table">
+    <thead>
+        <tr>
+            <th>Tên Ca</th>
+            <th>Ngày làm</th>
+            <th>Giờ vào</th>
+            <th>Giờ ra</th>
+            <th>Số giờ làm</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.TenCa</td>
+                <td>@item.NgayBatDau.ToString("dd/MM/yyyy")</td>
+                <td>
+                    @(DateTime.Today.Add(item.ThoiGianBatDau).ToString("HH:mm"))
+                </td>
+                <td>
+                    @(DateTime.Today.Add(item.ThoiGianKetThuc).ToString("HH:mm"))
+                </td>
+
+                <td>@item.SoGioLam</td>
+            </tr>
+        }
+    </tbody>
+</table>

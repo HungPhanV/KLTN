@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BoPhan_Get" xml:space="preserve">
+    <value>proc_BoPhan_Get</value>
+  </data>
+  <data name="BoPhan_SelectWithNhanVienCount" xml:space="preserve">
+    <value>proc_BoPhan_SelectWithNhanVienCount</value>
+  </data>
+  <data name="NhanVien_Delete" xml:space="preserve">
+    <value>proc_NhanVien_Delete</value>
+  </data>
+  <data name="NhanVien_Detail" xml:space="preserve">
+    <value>proc_NhanVien_Detail</value>
+  </data>
+  <data name="NhanVien_Insert" xml:space="preserve">
+    <value>proc_NhanVien_Insert</value>
+  </data>
+  <data name="NhanVien_Select" xml:space="preserve">
+    <value>proc_NhanVien_Select</value>
+  </data>
+  <data name="NhanVien_Update" xml:space="preserve">
+    <value>proc_NhanVien_Update</value>
+  </data>
+  <data name="PhongBan_Delete" xml:space="preserve">
+    <value>proc_PhongBan_Delete</value>
+  </data>
+  <data name="PhongBan_Get" xml:space="preserve">
+    <value>proc_PhongBan_Get</value>
+  </data>
+  <data name="PhongBan_Insert" xml:space="preserve">
+    <value>proc_PhongBan_Insert</value>
+  </data>
+  <data name="PhongBan_Select" xml:space="preserve">
+    <value>proc_PhongBan_Select</value>
+  </data>
+  <data name="PhongBan_SelectByParent" xml:space="preserve">
+    <value>proc_PhongBan_SelectByParent</value>
+  </data>
+  <data name="PhongBan_Update" xml:space="preserve">
+    <value>proc_PhongBan_Update</value>
+  </data>
+  <data name="PhongBan_SearchByName" xml:space="preserve">
+    <value>proc_PhongBan_SearchByName</value>
+  </data>
+  <data name="QuaTrinh_Create" xml:space="preserve">
+    <value>proc_QuaTrinh_Insert</value>
+  </data>
+  <data name="QuaTrinh_Delete" xml:space="preserve">
+    <value>proc_QuaTrinh_Delete</value>
+  </data>
+  <data name="QuaTrinh_Update" xml:space="preserve">
+    <value>proc_QuaTrinh_Update</value>
+  </data>
+  <data name="QuaTrinh_GetByMaNV" xml:space="preserve">
+    <value>proc_QuaTrinh_GetByMaNV</value>
+  </data>
+  <data name="ChucVu_Create" xml:space="preserve">
+    <value>proc_ChucVu_Insert</value>
+  </data>
+  <data name="ChucVu_Delete" xml:space="preserve">
+    <value>proc_ChucVu_Delete</value>
+  </data>
+  <data name="ChucVu_Select" xml:space="preserve">
+    <value>proc_ChucVu_Select</value>
+  </data>
+  <data name="ChucVu_Update" xml:space="preserve">
+    <value>proc_ChucVu_Update</value>
+  </data>
+  <data name="NhanVien_SearchAndFilterPaged" xml:space="preserve">
+    <value>proc_NhanVien_SearchAndFilterPaged</value>
+  </data>
+  <data name="PhongBan_SearchAndFilterPaged" xml:space="preserve">
+    <value>proc_PhongBan_SearchAndFilterPaged</value>
+  </data>
+  <data name="PhongBan_SelectedPaged" xml:space="preserve">
+    <value>proc_PhongBan_SelectPaged</value>
+  </data>
+  <data name="HopDongLaoDong_Delete" xml:space="preserve">
+    <value>proc_HopDong_Delete</value>
+  </data>
+  <data name="HopDongLaoDong_GetByMaNV" xml:space="preserve">
+    <value>proc_HopDong_GetByMaNV</value>
+  </data>
+  <data name="HopDongLaoDong_Insert" xml:space="preserve">
+    <value>proc_HopDong_Insert</value>
+  </data>
+  <data name="HopDongLaoDong_Select" xml:space="preserve">
+    <value>proc_HopDong_Select</value>
+  </data>
+  <data name="HopDongLaoDong_Update" xml:space="preserve">
+    <value>proc_HopDong_Update</value>
+  </data>
+  <data name="HopDong_GetByMaHD" xml:space="preserve">
+    <value>proc_HopDong_GetByMaHD</value>
+  </data>
+  <data name="HopDongLaoDong_GetByMaHD" xml:space="preserve">
+    <value>proc_HopDong_GetByMaHD</value>
+  </data>
+  <data name="ViTri_Select" xml:space="preserve">
+    <value>proc_ViTri_Select</value>
+  </data>
+  <data name="NhanVien_CountByGender" xml:space="preserve">
+    <value>proc_NhanVien_CountByGender</value>
+  </data>
+  <data name="LoaiHopDong_Select" xml:space="preserve">
+    <value>proc_LoaiHopDong_Select</value>
+  </data>
+  <data name="FileHopDong_GetByMaHD" xml:space="preserve">
+    <value>proc_FileHopDong_GetByMaHD</value>
+  </data>
+  <data name="FileHopDong_Select" xml:space="preserve">
+    <value>proc_FileHopDong_Select</value>
+  </data>
+  <data name="FileHopDong_Insert" xml:space="preserve">
+    <value>proc_FileHopDong_Insert</value>
+  </data>
+  <data name="FileHopDong_GetFileById" xml:space="preserve">
+    <value>proc_FileHopDong_GetFileById</value>
+  </data>
+  <data name="FileHopDong_Delete" xml:space="preserve">
+    <value>proc_FileHopDong_Delete</value>
+  </data>
+  <data name="LoaiCaLam_Select" xml:space="preserve">
+    <value>proc_LoaiCaLam_List</value>
+  </data>
+  <data name="ChamCong_Delete" xml:space="preserve">
+    <value>proc_ChamCong_Delete</value>
+  </data>
+  <data name="ChamCong_Insert" xml:space="preserve">
+    <value>proc_ChamCong_Insert</value>
+  </data>
+  <data name="ChamCong_Select" xml:space="preserve">
+    <value>proc_ChamCong_List</value>
+  </data>
+  <data name="ChamCong_Update" xml:space="preserve">
+    <value>proc_ChamCong_Update</value>
+  </data>
+  <data name="CaLam_Delete" xml:space="preserve">
+    <value>proc_CaLam_Delete</value>
+  </data>
+  <data name="CaLam_Insert" xml:space="preserve">
+    <value>proc_CaLam_Insert</value>
+  </data>
+  <data name="CaLam_Select" xml:space="preserve">
+    <value>proc_CaLam_List</value>
+  </data>
+  <data name="CaLam_Update" xml:space="preserve">
+    <value>proc_CaLam_Update</value>
+  </data>
+  <data name="NhanVien_ListPaged" xml:space="preserve">
+    <value>proc_NhanVien_ListPaged</value>
+  </data>
+  <data name="ChamCong_KiemTraDaChamCong" xml:space="preserve">
+    <value>proc_ChamCong_KiemTraDaChamCong</value>
+  </data>
+  <data name="ChamCong_UpdateThoiGianKetThucChamCong" xml:space="preserve">
+    <value>proc_ChamCong_UpdateThoiGianKetThucChamCong</value>
+  </data>
+  <data name="CaLam_SelectByMaNV" xml:space="preserve">
+    <value>proc_CaLam_SelectByMaNV</value>
+  </data>
+  <data name="ChamCong_SelectByMaNV" xml:space="preserve">
+    <value>proc_ChamCong_SelectByMaNV</value>
+  </data>
+  <data name="TaiKhoan_Delete" xml:space="preserve">
+    <value>proc_TaiKhoan_DeleteByMaNV</value>
+  </data>
+  <data name="TaiKhoan_SelectAll" xml:space="preserve">
+    <value>proc_TaiKhoan_SelectAll</value>
+  </data>
+  <data name="TaiKhoan_Update" xml:space="preserve">
+    <value>proc_TaiKhoan_Update</value>
+  </data>
+  <data name="TaiKhoan_UpdateRoleByMaNV" xml:space="preserve">
+    <value>proc_TaiKhoan_UpdateRoleByMaNV</value>
+  </data>
+  <data name="NghiPhep_Delete" xml:space="preserve">
+    <value>proc_NghiPhep_Delete</value>
+  </data>
+  <data name="NghiPhep_Insert" xml:space="preserve">
+    <value>proc_NghiPhep_Insert</value>
+  </data>
+  <data name="NghiPhep_List" xml:space="preserve">
+    <value>proc_NghiPhep_List</value>
+  </data>
+  <data name="NghiPhep_Update" xml:space="preserve">
+    <value>proc_NghiPhep_Update</value>
+  </data>
+  <data name="NghiPhep_UpdateTrangThai" xml:space="preserve">
+    <value>proc_NghiPhep_UpdateTrangThai</value>
+  </data>
+  <data name="ChamCong_TongHopChamCong" xml:space="preserve">
+    <value>proc_ChamCong_TongHopChamCong</value>
+  </data>
+  <data name="ChamCong_TongHopChamCongTheoThang" xml:space="preserve">
+    <value>proc_ChamCong_TongHopChamCongTheoThang</value>
+  </data>
+  <data name="LoaiNghiPhep_List" xml:space="preserve">
+    <value>proc_LoaiNghiPhep_List</value>
+  </data>
+  <data name="NghiPhep_ListByMaNV" xml:space="preserve">
+    <value>proc_NghiPhep_ListByMaNV</value>
+  </data>
+</root>

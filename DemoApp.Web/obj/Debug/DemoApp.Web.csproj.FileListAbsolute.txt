@@ -1,0 +1,154 @@
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\DemoApp.Web.dll.config
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\DemoApp.Web.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\DemoApp.Web.pdb
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\Antlr3.Runtime.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\Microsoft.Web.Infrastructure.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\Newtonsoft.Json.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\System.Web.Helpers.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\System.Web.Mvc.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\System.Web.Optimization.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\System.Web.Razor.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\System.Web.WebPages.Deployment.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\System.Web.WebPages.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\System.Web.WebPages.Razor.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\WebGrease.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\System.Web.Helpers.xml
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\System.Web.Mvc.xml
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\System.Web.Optimization.xml
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\System.Web.Razor.xml
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\System.Web.WebPages.xml
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\System.Web.WebPages.Deployment.xml
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\System.Web.WebPages.Razor.xml
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\Antlr3.Runtime.pdb
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\Newtonsoft.Json.xml
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\obj\Debug\DemoApp.Web.csprojResolveAssemblyReference.cache
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\obj\Debug\DemoApp.Web.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\obj\Debug\DemoApp.Web.pdb
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\DemoApp.BussinessLayers.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\DemoApp.Entities.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\DemoApp.DataLayers.dll
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\DemoApp.BussinessLayers.pdb
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\DemoApp.Entities.pdb
+D:\Visual Studio 2013\Projects\DemoApp\DemoApp.Web\bin\DemoApp.DataLayers.pdb
+I:\MyProjects\DemoApp\DemoApp.Web\bin\DemoApp.Web.dll.config
+I:\MyProjects\DemoApp\DemoApp.Web\bin\DemoApp.Web.dll
+I:\MyProjects\DemoApp\DemoApp.Web\bin\DemoApp.Web.pdb
+I:\MyProjects\DemoApp\DemoApp.Web\bin\Antlr3.Runtime.dll
+I:\MyProjects\DemoApp\DemoApp.Web\bin\DemoApp.BussinessLayers.dll
+I:\MyProjects\DemoApp\DemoApp.Web\bin\DemoApp.Entities.dll
+I:\MyProjects\DemoApp\DemoApp.Web\bin\Microsoft.Web.Infrastructure.dll
+I:\MyProjects\DemoApp\DemoApp.Web\bin\Newtonsoft.Json.dll
+I:\MyProjects\DemoApp\DemoApp.Web\bin\System.Web.Helpers.dll
+I:\MyProjects\DemoApp\DemoApp.Web\bin\System.Web.Optimization.dll
+I:\MyProjects\DemoApp\DemoApp.Web\bin\System.Web.Razor.dll
+I:\MyProjects\DemoApp\DemoApp.Web\bin\System.Web.WebPages.Deployment.dll
+I:\MyProjects\DemoApp\DemoApp.Web\bin\System.Web.WebPages.dll
+I:\MyProjects\DemoApp\DemoApp.Web\bin\System.Web.WebPages.Razor.dll
+I:\MyProjects\DemoApp\DemoApp.Web\bin\WebGrease.dll
+I:\MyProjects\DemoApp\DemoApp.Web\bin\DemoApp.DataLayers.dll
+I:\MyProjects\DemoApp\DemoApp.Web\bin\DemoApp.BussinessLayers.pdb
+I:\MyProjects\DemoApp\DemoApp.Web\bin\DemoApp.Entities.pdb
+I:\MyProjects\DemoApp\DemoApp.Web\bin\System.Web.Mvc.xml
+I:\MyProjects\DemoApp\DemoApp.Web\bin\System.Web.Helpers.xml
+I:\MyProjects\DemoApp\DemoApp.Web\bin\System.Web.Optimization.xml
+I:\MyProjects\DemoApp\DemoApp.Web\bin\System.Web.Razor.xml
+I:\MyProjects\DemoApp\DemoApp.Web\bin\System.Web.WebPages.xml
+I:\MyProjects\DemoApp\DemoApp.Web\bin\System.Web.WebPages.Deployment.xml
+I:\MyProjects\DemoApp\DemoApp.Web\bin\System.Web.WebPages.Razor.xml
+I:\MyProjects\DemoApp\DemoApp.Web\bin\Antlr3.Runtime.pdb
+I:\MyProjects\DemoApp\DemoApp.Web\bin\Newtonsoft.Json.xml
+I:\MyProjects\DemoApp\DemoApp.Web\bin\DemoApp.DataLayers.pdb
+I:\MyProjects\DemoApp\DemoApp.Web\obj\Debug\DemoApp.Web.csprojResolveAssemblyReference.cache
+I:\MyProjects\DemoApp\DemoApp.Web\obj\Debug\DemoApp.Web.dll
+I:\MyProjects\DemoApp\DemoApp.Web\obj\Debug\DemoApp.Web.pdb
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\obj\Debug\DemoApp.Web.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\obj\Debug\DemoApp.Web.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\obj\Debug\DemoApp.Web.pdb
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\DemoApp.Web.dll.config
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\DemoApp.Web.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\DemoApp.Web.pdb
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\Antlr3.Runtime.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\DemoApp.BussinessLayers.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\DemoApp.Entities.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\Newtonsoft.Json.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\System.Web.Helpers.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\System.Web.Optimization.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\System.Web.Razor.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\System.Web.WebPages.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\System.Web.WebPages.Razor.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\WebGrease.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\DemoApp.DataLayers.dll
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\DemoApp.BussinessLayers.pdb
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\DemoApp.Entities.pdb
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\System.Web.Mvc.xml
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\System.Web.Helpers.xml
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\System.Web.Optimization.xml
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\System.Web.Razor.xml
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\System.Web.WebPages.xml
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\System.Web.WebPages.Razor.xml
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\Antlr3.Runtime.pdb
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\Newtonsoft.Json.xml
+C:\Users\Admin\Downloads\DemoApp\DemoApp.Web\bin\DemoApp.DataLayers.pdb
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\Antlr3.Runtime.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\DemoApp.BussinessLayers.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\DemoApp.Entities.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\Microsoft.Web.Infrastructure.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\Newtonsoft.Json.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\System.Web.Helpers.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\System.Web.Optimization.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\System.Web.Razor.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\System.Web.WebPages.Deployment.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\System.Web.WebPages.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\System.Web.WebPages.Razor.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\WebGrease.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\DemoApp.DataLayers.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\DemoApp.BussinessLayers.pdb
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\DemoApp.Entities.pdb
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\System.Web.Helpers.xml
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\System.Web.Optimization.xml
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\System.Web.Razor.xml
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\System.Web.WebPages.xml
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\System.Web.WebPages.Deployment.xml
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\System.Web.WebPages.Razor.xml
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\Antlr3.Runtime.pdb
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\Newtonsoft.Json.xml
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\DemoApp.DataLayers.pdb
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\obj\Debug\DemoApp.Web.csprojResolveAssemblyReference.cache
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\DemoApp.Web.dll.config
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\DemoApp.Web.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\bin\DemoApp.Web.pdb
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\obj\Debug\DemoApp.Web.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Web\obj\Debug\DemoApp.Web.pdb
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\DemoApp.Web.dll.config
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\DemoApp.Web.dll
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\DemoApp.Web.pdb
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\Antlr3.Runtime.dll
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\DemoApp.BussinessLayers.dll
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\DemoApp.Entities.dll
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\Microsoft.Web.Infrastructure.dll
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\Newtonsoft.Json.dll
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\System.Web.Helpers.dll
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\System.Web.Optimization.dll
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\System.Web.Razor.dll
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\System.Web.WebPages.Deployment.dll
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\System.Web.WebPages.dll
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\System.Web.WebPages.Razor.dll
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\WebGrease.dll
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\DemoApp.DataLayers.dll
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\DemoApp.BussinessLayers.pdb
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\DemoApp.Entities.pdb
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\System.Web.Helpers.xml
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\System.Web.Optimization.xml
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\System.Web.Razor.xml
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\System.Web.WebPages.xml
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\System.Web.WebPages.Deployment.xml
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\System.Web.WebPages.Razor.xml
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\Antlr3.Runtime.pdb
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\Newtonsoft.Json.xml
+D:\Project_ASP.NET\QLNS\DemoApp.Web\bin\DemoApp.DataLayers.pdb
+D:\Project_ASP.NET\QLNS\DemoApp.Web\obj\Debug\DemoApp.Web.csprojResolveAssemblyReference.cache
+D:\Project_ASP.NET\QLNS\DemoApp.Web\obj\Debug\DemoApp.Web.dll
+D:\Project_ASP.NET\QLNS\DemoApp.Web\obj\Debug\DemoApp.Web.pdb

@@ -1,0 +1,4 @@
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Entities\bin\Release\DemoApp.Entities.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Entities\bin\Release\DemoApp.Entities.pdb
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Entities\obj\Release\DemoApp.Entities.dll
+D:\Lưu trữ Project ASP.NET\QLNS\DemoApp.Entities\obj\Release\DemoApp.Entities.pdb

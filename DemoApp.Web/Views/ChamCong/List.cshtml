@@ -1,0 +1,60 @@
+﻿@model IEnumerable<DemoApp.Entities.ChamCong>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Quản lý chấm công</h2>
+
+
+<table class="table mt-5">
+    <tr>
+  
+        <th>
+            Họ tên
+        </th>
+        <th>
+            Thời gian bắt đầu
+        </th>
+        <th>
+           Thời gian kết thúc
+        </th>
+       
+        <th>
+            Ngày bắt đầu
+        </th>
+        <th>
+           Ngày kết thúc
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+ 
+        <td>
+            @Html.DisplayFor(modelItem => item.HoTen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThoiGianBatDau)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThoiGianKetThuc)
+        </td>
+       
+        <td>
+            @item.NgayBatDau.ToString("dd/MM/yyyy")
+        </td>
+        <td>
+            @item.NgayBatDau.ToString("dd/MM/yyyy")
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<DemoApp.Entities.HopDongLaoDong>
+@using DemoApp.Entities;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Danh sách hợp đồng lao động</h2>
+
+<div>
+    @Html.ActionLink("Thêm hợp đồng", "Create", "HopDong", null, new { @class = "btn btn-success mb-3" })
+</div>
+<div id="tableContainer">
+
+</div>
+<script>
+    $(document).ready(function () {
+        loadTableData();
+    });
+
+    // Hàm để tải lại dữ liệu bảng
+    function loadTableData() {
+
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GetTableData", "HopDong")",
+            dataType: 'html',
+            success: function (data) {
+                $("#tableContainer").html(data);
+            },
+            error: function (error) {
+                console.error('Lỗi khi tải lại bảng:', error);
+            }
+        });
+    }
+</script>

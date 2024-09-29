@@ -1,0 +1,175 @@
+﻿@model IEnumerable<DemoApp.Entities.TaiKhoan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Quản lý tài khoản</h2>
+
+<table class="table mt-5 table-condensed">
+    <tr>
+
+        <th>
+            Tên nhân viên
+        </th>
+        <th>
+            Tên tài khoản
+        </th>
+        <th>
+            Mật khẩu
+        </th>
+        <th>
+            Vai trò
+        </th>
+        <th class="text-center" width="20%">Thao tác</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @{
+                    var maNV = item.MaNV;
+                    var danhSachNhanVien = ViewBag.DanhSachNhanVien as List<DemoApp.Entities.NhanVien>;
+
+                    if (danhSachNhanVien != null)
+                    {
+                        var nhanVien = danhSachNhanVien.FirstOrDefault(nv => nv.MaNV == maNV);
+
+                        if (nhanVien != null)
+                        {
+                            @nhanVien.HoTen
+                        }
+                        else
+                        {
+                            @("Không có")
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                <div class="btn-group">
+                    <button class="btn btn-warning btn-sm text-light" id="editTaiKhoanButton" data-toggle="modal" data-target="#editTaiKhoanModal"><i class="fa fa-wrench" aria-hidden="true"></i> Cập nhật</button>
+                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-delete-id="@item.Username" data-delete-type="parent"><i class="fa fa-trash" aria-hidden="true"></i> Xoá</button>
+                </div>
+            </td>
+        </tr>
+                    }
+    @*<div class="modal fade" id="edittaikhoanmodal" tabindex="-1" role="dialog" aria-labelledby="edittaikhoanmodallabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edittaikhoanmodallabel">sửa thông tin tài khoản</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="edittaikhoanform">
+                        <div class="form-group">
+                            <label for="editpassword">mật khẩu:</label>
+                            <input type="text" class="form-control" id="editpassword">
+                        </div>
+                        <div class="form-group">
+                            <label for="editrole">vai trò:</label>
+                            <select class="form-control" id="editrole" name="role">
+                                <option value="user">user</option>
+                                <option value="admin">admin</option>
+                            </select>
+                        </div>
+                        <input type="hidden" id="editmanv">
+                        <input type="hidden" id="editusername">  thêm trường ẩn cho mã phòng ban 
+                        <button type="submit" class="btn btn-success float-right">lưu thay đổi</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+</table>
+<script>
+    @*$(document).ready(function () {
+        // sự kiện khi nút "sửa" được bấm
+        $('#edittaikhoanbutton').click(function () {
+            // lấy hàng chứa nút "sửa" được bấm
+            var row = $(this).closest('tr');
+
+            // lấy thông tin từ các ô trong hàng
+            var manv = row.find('td:eq(0)').text().trim(); // lấy giá trị từ cột thứ 0
+            var username = row.find('td:eq(1)').text(); // lấy giá trị từ cột thứ 1
+            var password = row.find('td:eq(2)').text(); // lấy giá trị từ cột thứ 2
+            var role = row.find('td:eq(3)').text().trim(); // lấy giá trị từ cột thứ 3
+
+            // đưa thông tin vào modal
+            $('#editmanv').val(manv);
+            $('#editusername').val(username);
+            $('#editpassword').val(password);
+            $('#editrole').val(role);
+
+            // hiển thị modal chỉnh sửa thông tin tài khoản
+            $('#edittaikhoanmodal').modal('show');
+        });
+
+        // sự kiện khi form "lưu thông tin" trong modal chỉnh sửa được gửi đi
+        $("#edittaikhoanform").submit(function (event) {
+            event.preventdefault(); // ngăn chặn form gửi thông tin một cách truyền thống
+
+            // lấy thông tin từ form chỉnh sửa tài khoản
+            var username = $("#editusername").val();
+            var password = $("#editpassword").val();
+            var role = $("#editrole").val();
+
+            // gửi dữ liệu thông qua ajax để cập nhật thông tin tài khoản
+            $.ajax({
+                type: "post",
+                url: "@url.action("update", "taikhoan")", // điều chỉnh action và controller tương ứng với việc cập nhật thông tin tài khoản
+                data: {
+                    username: username,
+                    password: password,
+                    role: role
+                },
+                success: function (response) {
+                    if (response.success) {
+                        // hiển thị thông báo thành công
+                        swal.fire({
+                            icon: 'success',
+                            title: 'cập nhật thông tin tài khoản thành công!',
+                            showconfirmbutton: false,
+                            timer: 1500
+                        });
+
+                        // đóng popup sau khi chỉnh sửa thành công
+                        $("#edittaikhoanmodal").modal("hide");
+
+                        // tải lại bảng dữ liệu tài khoản sau khi cập nhật thành công
+                        loadtabledatatosearch();
+                    } else {
+                        // xử lý lỗi nếu có
+                        console.error("lỗi khi cập nhật thông tin tài khoản:", response.message);
+                    }
+                },
+                error: function (error) {
+                    // xử lý lỗi nếu có
+                    console.error("lỗi khi cập nhật thông tin tài khoản:", error);
+                }
+            });
+        });
+    });*@
+
+</script>

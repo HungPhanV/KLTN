@@ -1,0 +1,75 @@
+﻿@model IEnumerable<DemoApp.Entities.NhanVien>
+@using DemoApp.Entities;
+@using DemoApp.BussinessLayers;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center mt-3">
+    <h2>Phân ca nhân viên </h2>
+</div>
+
+
+<div id="tableContainer">
+    <!-- Đây là nơi dữ liệu danh sách nhân viên sẽ được hiển thị -->
+
+</div>
+
+<script>
+
+    var currentPage = @ViewBag.CurrentPage;
+    var totalPages = @ViewBag.TotalPages;
+    var defaultPageSize = 10; // Kích thước trang mặc định
+    $("#setPageSizeButton").click(function () {
+        var newPageSize = parseInt($("#pageSizeSelect").val());
+
+        if (!isNaN(newPageSize) && newPageSize > 0) {
+            defaultPageSize = newPageSize; // Thay đổi giá trị defaultPageSize
+            currentPage = 1; // Reset current page to 1
+            loadTableData(currentPage); // Tải lại dữ liệu với kích thước trang mới
+        } else {
+            alert("Vui lòng chọn một tùy chọn hợp lệ.");
+        }
+    });
+
+
+    $(document).ready(function () {
+        loadTableData(currentPage); // Load data for the initial page
+        setActiveButton(currentPage); // Set the initial active button
+    });
+
+    function setActiveButton(page) {
+        $(".page-button").removeClass("active"); // Remove the active class from all numeric buttons
+        $("#id" + page).addClass("active"); // Add the active class to the selected numeric button
+    }
+
+    function loadTableData(page) {
+        var searchInput = "";
+        var gender = "all";
+        var maPB =0;
+        var pageSize = defaultPageSize; // Sử dụng kích thước trang mặc định
+
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("SearchAndFilterPaged", "PhanCa")",
+            data: { searchTerm: searchInput, gender: gender, maPB: maPB, page: page, pageSize: pageSize },
+            dataType: 'html',
+            success: function (data) {
+                $("#tableContainer").html(data);
+                setActiveButton(page);
+            },
+            error: function (error) {
+                console.error('Lỗi khi tải lại bảng:', error);
+            }
+        });
+    }
+
+    // Xử lý sự kiện khi nút "Lọc và Tìm kiếm" được bấm
+    $("#searchAndFilterButton").click(function () {
+        currentPage = 1; // Reset current page to 1 when filtering
+        loadTableData(currentPage);
+    });
+
+</script>

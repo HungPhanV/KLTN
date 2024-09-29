@@ -1,0 +1,29 @@
+﻿@model IEnumerable<DemoApp.Entities.ChamCong>
+
+@{
+    ViewBag.Title = "Chấm Công";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="text-center">Lịch sử chấm công</h2>
+<div id='calendar'></div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar');
+    var events = @Html.Raw(Json.Encode(Model.Select(item => new {
+                title = item.HoTen + " - Đã chấm công<br>" + item.ThoiGianBatDau.Hours + ":"+item.ThoiGianBatDau.Minutes+ " - " + item.ThoiGianKetThuc.Hours + ":" + item.ThoiGianKetThuc.Minutes ,
+                start = item.NgayBatDau.ToString("yyyy-MM-dd"),
+                end = item.NgayKetThuc.ToString("yyyy-MM-dd")
+            })));
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        eventContent: function (arg) {
+            return { html: '<div class="fc-title">' + arg.event.title + '</div>' };
+        },
+        events: events
+    });
+
+    calendar.render();
+});
+
+</script>

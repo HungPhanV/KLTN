@@ -1,0 +1,83 @@
+﻿@model IEnumerable<DemoApp.Entities.QuaTrinh>
+@using DemoApp.Entities;
+
+@if (Model != null && ViewBag.DanhSachPhongBan != null && ViewBag.DanhSachChucVu != null && ViewBag.DanhSachViTri != null)
+{
+    var quaTrinhChinhThuc = Model.Where(q => q.TrangThai == "Chính thức");
+    if (quaTrinhChinhThuc.Any())
+    {
+    <table class="mt-4">
+        <tbody>
+            @foreach (var quaTrinh in quaTrinhChinhThuc)
+            {
+                <tr>
+                    @{
+                        var maPB = quaTrinh.MaPB;
+                        var danhSachPhongBan = ViewBag.DanhSachPhongBan as List<DemoApp.Entities.PhongBan>;
+
+                        if (danhSachPhongBan != null)
+                        {
+                            var phongBan = danhSachPhongBan.FirstOrDefault(pb => pb.MaPB == maPB);
+
+                            if (phongBan != null)
+                            {
+                                <td><strong>Phòng ban: </strong>@phongBan.TenPB</td>
+                            }
+                            else
+                            {
+                                <td>Phòng ban: Phòng ban không xác định</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>Danh sách phòng ban không có</td>
+                        }
+
+                        var maCV = quaTrinh.MaCV;
+                        var danhSachChucVu = ViewBag.DanhSachChucVu as List<DemoApp.Entities.ChucVu>;
+
+                        if (danhSachChucVu != null)
+                        {
+                            var chucVu = danhSachChucVu.FirstOrDefault(cv => cv.MaCV == maCV);
+
+                            if (chucVu != null)
+                            {
+                                <td><strong>Chức vụ:</strong> @chucVu.TenCV</td>
+                            }
+                            else
+                            {
+                                <td>Chức vụ: Chức vụ không xác định</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>Danh sách chức vụ không có</td>
+                        }
+
+                        var maVT = quaTrinh.MaVT;
+                        var danhSachViTri = ViewBag.DanhSachViTri as List<DemoApp.Entities.ViTri>;
+
+                        if (danhSachViTri != null)
+                        {
+                            var viTri = danhSachViTri.FirstOrDefault(vt => vt.MaVT == maVT);
+
+                            if (viTri != null)
+                            {
+                                <td><strong>Vị trí:</strong> @viTri.TenVT</td>
+                            }
+                            else
+                            {
+                                <td>Vị trí: Vị trí không xác định</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>Danh sách vị trí không có</td>
+                        }
+                    }
+                </tr>
+                        }
+        </tbody>
+    </table>
+                            }
+                        }

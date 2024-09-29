@@ -1,0 +1,78 @@
+﻿<style>
+    /* CSS cho hàng con */
+    .child-row {
+        font-size: 80%;
+        display: none;
+    }
+
+        /* Áp dụng text-indent cho tất cả các cột trừ cột đầu tiên */
+        .child-row td:not(:first-child) {
+            text-indent: 40px; /* Thụt vào bên phải */
+        }
+
+    /* CSS cho container chứa nút */
+    .btn-group {
+        display: flex;
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        gap: 10px; /* Khoảng cách giữa các nút */
+    }
+</style>
+
+@model IEnumerable<DemoApp.Entities.PhongBan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2 class="text-center mt-3">Quản lý phòng ban</h2>
+<div class="row justify-content-end mt-3">
+    <div class="col-md-3">
+        <div class="input-group">
+            <input type="text" id="searchInput" class="form-control" placeholder="Nhập tên phòng ban...">
+            <div class="input-group-append">
+                <button class="btn btn-primary" id="searchButton" type="button">Tìm kiếm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="tableContainer">
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        loadTableDataToSearch();
+    });
+    @*var currentPage = @ViewBag.CurrentPage;
+    var totalPages = @ViewBag.TotalPages;
+
+
+    function setActiveButton(page) {
+        $(".page-button").removeClass("active"); // Remove the active class from all numeric buttons
+        $("#id" + page).addClass("active"); // Add the active class to the selected numeric button
+    }*@
+    function loadTableDataToSearch() {
+        var searchInput = $("#searchInput").val();
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("Search", "PhongBan")",
+            data: { searchTerm: searchInput },
+            dataType: 'html',
+            success: function (data) {
+                $("#tableContainer").html(data);
+            },
+            error: function (error) {
+                console.error('Error loading data:', error);
+            }
+        });
+    }
+
+    // JavaScript - Event Handling
+    $("#searchButton").click(function () {
+        loadTableDataToSearch();
+    });
+</script>

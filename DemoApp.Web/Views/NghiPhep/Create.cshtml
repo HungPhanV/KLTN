@@ -1,0 +1,168 @@
+﻿@model DemoApp.Entities.NghiPhep
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Tạo đơn nghỉ phép</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="tuNgay">Từ ngày:</label>
+                    <input type="text" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="tuNgay" name="tuNgay">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="denNgay">Đến ngày:</label>
+                    <input type="text" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="denNgay" name="denNgay">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Loại nghỉ phép:</label>
+            <div class="form-group">
+                @Html.DropDownList("MaLoaiNghiPhep", new SelectList(ViewBag.DanhSachLoaiNghiPhep, "MaLoaiNghiPhep", "TenLoai"), "Chọn loại nghỉ phép", htmlAttributes: new { @class = "form-control", @id = "MaLoaiNghiPhep" })
+            </div>
+        </div>
+            <div class="form-group">
+                <label for="lyDoBoSung">Lý do bổ sung:</label>
+                <textarea class="form-control" id="lyDoBoSung" rows="4" name="lyDoBoSung"></textarea>
+            </div>
+
+            <div class="form-group">
+                <input type="button" value="Nộp đơn" class="btn btn-success" id="btnSubmit" />
+            </div>
+        </div>
+}
+
+    <script>
+        $(document).ready(function () {
+            // Bắt sự kiện click nút Nộp đơn
+            $("#btnSubmit").click(function () {
+
+                var tuNgay = $("#tuNgay").val().split('/');
+                var denNgay = $("#denNgay").val().split('/');
+                if (tuNgay == "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Vui lòng chọn ngày bắt đầu!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    return;
+                }
+                if (denNgay == "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Vui lòng chọn ngày kết thúc!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    return;
+                }
+                var tuNgayDate = new Date(tuNgay[2], tuNgay[1] - 1, tuNgay[0]); // tháng - 1 vì tháng bắt đầu từ 0
+                var denNgayDate = new Date(denNgay[2], denNgay[1] - 1, denNgay[0]);
+                // Kiểm tra nếu ngày bắt đầu lớn hơn ngày kết thúc
+                if (tuNgayDate > denNgayDate) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Ngày bắt đầu phải nhỏ hơn ngày kết thúc!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    return; // Dừng lại nếu có lỗi
+                }
+                // Tính tổng số ngày
+                var tongSoNgay = ((denNgayDate - tuNgayDate) / (60 * 60 * 24 * 1000))+1;
+                var maLoaiNghiPhep = $("#MaLoaiNghiPhep").val();
+                var lyDoBoSung = $("#lyDoBoSung").val();
+                if (maLoaiNghiPhep == "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Vui lòng chọn loại nghỉ phép!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    return;
+                }
+                if (maLoaiNghiPhep == 1 && tongSoNgay > 1) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Loại nghỉ phép trên chỉ được nghỉ tối đa 1 ngày!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    return;
+                }
+                if (maLoaiNghiPhep == 2 && tongSoNgay > 2) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Loại nghỉ phép trên chỉ được nghỉ tối đa 2 ngày!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    return; // Dừng lại nếu có lỗi
+                }
+                if (maLoaiNghiPhep == 3 && tongSoNgay > 1) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Loại nghỉ phép trên chỉ được nghỉ tối đa 1 ngày!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    return; // Dừng lại nếu có lỗi
+                }
+                if (maLoaiNghiPhep == 4 && tongSoNgay > 3) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Loại nghỉ phép trên chỉ được nghỉ tối đa 1 ngày!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    return; // Dừng lại nếu có lỗi
+                }
+
+            
+                // Tạo đối tượng dữ liệu gửi đi
+                var dataToSend = {
+                    NgayBatDau: tuNgay.reverse().join('-'),
+                    NgayKetThuc: denNgay.reverse().join('-'),
+                    MaLoaiNghiPhep: maLoaiNghiPhep,
+                    LyDoBoSung: lyDoBoSung
+                };
+                // Gửi Ajax request
+                $.ajax({
+                    url: '@Url.Action("Create", "NghiPhep")', // Đường dẫn tới hành động trong controller
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(dataToSend),
+                    success: function (data) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Nộp đơn thành công!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                        // Sử dụng window.location.reload() để tải lại trang sau 1,5 giây
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1500);
+                    },
+                    error: function (error) {
+                        // Xử lý lỗi (nếu có)
+                        console.log(error);
+                    }
+                });
+            });
+        });
+
+    </script>
