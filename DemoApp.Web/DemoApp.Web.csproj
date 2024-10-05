@@ -223,12 +223,6 @@
     <Folder Include="assets\js\" />
     <Folder Include="FileHopDong\" />
     <Folder Include="js\demo\" />
-    <Folder Include="Vendor\bootstrap\" />
-    <Folder Include="Vendor\chart.js\" />
-    <Folder Include="Vendor\datatables\" />
-    <Folder Include="Vendor\fontawesome-free\" />
-    <Folder Include="Vendor\jquery-easing\" />
-    <Folder Include="Vendor\jquery\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

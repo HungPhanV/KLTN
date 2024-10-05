@@ -8,74 +8,44 @@
 <div class="row">
     <div class="col-md-6 text-center">
         <h5>Nhân viên theo giới tính</h5>
-        <canvas id="myChart1" width="400" height="200"></canvas>
+        <div id="chart1"></div>
     </div>
     <div class="col-md-6 text-center">
         <h5>Thống kê số lượng</h5>
-        <canvas id="myChart2" width="400" height="400"></canvas>
+        <div id="chart2"></div>
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
     // Biểu đồ thống kê số lượng nhân viên theo giới tính
-    var ctx1 = document.getElementById('myChart1').getContext('2d');
-    var data1 = {
+    var options1 = {
+        chart: {
+            type: 'pie'
+        },
+        series: [@ViewBag.SLNVNam, @ViewBag.SLNVNu],
         labels: ['Nam', 'Nữ'],
-        datasets: [{
-            label: 'Số lượng nhân viên',
-            data: [@ViewBag.SLNVNam, @ViewBag.SLNVNu],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)'
-            ],
-            borderWidth:2
-        }]
+        colors: ['#FF6384', '#36A2EB']
     };
-    var myChart1 = new Chart(ctx1, {
-        type: 'pie',
-        data: data1,
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+
+    var chart1 = new ApexCharts(document.querySelector("#chart1"), options1);
+    chart1.render();
 
     // Biểu đồ thống kê số lượng nhân viên, phòng ban, và hợp đồng
-    var ctx2 = document.getElementById('myChart2').getContext('2d');
-    var data2 = {
-        labels: ['Nhân viên', 'Phòng ban', 'Hợp đồng'],
-        datasets: [{
-            label: 'Số lượng',
-            data: [@ViewBag.SLNV, @ViewBag.SLPB, @ViewBag.SLHD],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(25, 22, 235, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(25, 22, 235, 1)'
-            ],
-            borderWidth: 2
-        }]
+    var options2 = {
+        chart: {
+            type: 'bar'
+        },
+        series: [{
+            name: 'Số lượng',
+            data: [@ViewBag.SLNV, @ViewBag.SLPB, @ViewBag.SLHD]
+        }],
+        xaxis: {
+            categories: ['Nhân viên', 'Phòng ban', 'Hợp đồng']
+        },
+        colors: ['#FF6384', '#36A2EB', '#1916EB']
     };
-    var myChart2 = new Chart(ctx2, {
-        type: 'bar',
-        data: data2,
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+
+    var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
+    chart2.render();
 </script>
