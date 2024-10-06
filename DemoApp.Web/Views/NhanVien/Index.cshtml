@@ -40,31 +40,31 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <div id="tableContainer">
     <!-- Đây là nơi dữ liệu danh sách nhân viên sẽ được hiển thị -->
 
 </div>
-<div class="col-md-2 row">
-    <div class="col-md-9">        
-        <h6>Số lượng NV</h6>
-        <div class="input-group">
-            <select id="pageSizeSelect" class="form-control">
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-                <!-- Thêm các giá trị khác tại đây nếu cần -->
-            </select>
-            <div class="input-group-append">
-                <button class="btn btn-outline-primary" id="setPageSizeButton" type="button">OK</button>
+@*<div class="col-md-2 row">
+        <div class="col-md-9">
+            <h6>Số lượng NV</h6>
+            <div class="input-group">
+                <select id="pageSizeSelect" class="form-control">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <!-- Thêm các giá trị khác tại đây nếu cần -->
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-primary" id="setPageSizeButton" type="button">OK</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
+*@
 
 <script>
     var currentPage = @ViewBag.CurrentPage;
@@ -122,7 +122,7 @@
     $("#searchAndFilterButton").click(function () {
         currentPage = 1; // Reset current page to 1 when filtering
         // Lấy giá trị của các biến
-       
+
         var searchInputValue = $("#searchInput").val();
         var genderValue = $("#genderFilter").val();
         var MaPB = $("#positionFilter").val();

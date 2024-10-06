@@ -1,13 +1,11 @@
 ﻿@model IEnumerable<DemoApp.Entities.PhongBan>
 @using System.Linq;
 
-
-
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#createModal">
+<button type="button" class="btn btn-success mb-4" data-toggle="modal" data-target="#createModal">
     Tạo Phòng Ban Mới
 </button>
-<table id="phongBanTable" class="table table-condensed mt-4 myTable">
-    <thead >
+<table id="phongBanTable" class="table  table-hover ">
+    <thead class="thead-dark">
         <tr>
             <th width="15%" scope="col">Tên phòng ban</th>
             <th width="20%" scope="col">Địa chỉ</th>
@@ -20,11 +18,11 @@
         {
             <tr class="parent-row" data-has-children="true" data-parent-id="@parentPhongBan.MaPB" data-id="@parentPhongBan.MaPB">
                 <td class="hidden">@Html.DisplayFor(modelItem => parentPhongBan.MaPB)</td>
-                <td><span class="toggle-arrow">▼</span>@Html.DisplayFor(modelItem => parentPhongBan.TenPB)</td>
+                <td><span class="toggle-arrow">▼</span> @Html.DisplayFor(modelItem => parentPhongBan.TenPB)</td>
                 <td>@Html.DisplayFor(modelItem => parentPhongBan.DiaChi)</td>
                 <td>@Html.DisplayFor(modelItem => parentPhongBan.SDTPB)</td>
                 <td style="display:none;">@Html.DisplayFor(modelItem => parentPhongBan.MaPBParent)</td>
-                <td>
+                <td class="text-center">
                     <div class="btn-group">
                         <button class="btn btn-warning btn-sm editPhongBanButton text-light" data-toggle="modal" data-target="#editPhongBanModal"><i class="fa fa-wrench" aria-hidden="true"></i> Cập nhật</button>
                         <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-delete-id="@parentPhongBan.MaPB" data-parent-id="@parentPhongBan.MaPB" data-delete-type="parent"><i class="fa fa-trash" aria-hidden="true"></i> Xoá</button>
@@ -42,9 +40,11 @@
                     <td>@Html.DisplayFor(modelItem => child.DiaChi)</td>
                     <td width="10%">@Html.DisplayFor(modelItem => child.SDTPB)</td>
                     <td style="display:none;">@Html.DisplayFor(modelItem => child.MaPBParent)</td>
-                    <td class="btn-group">
-                        <button class="btn btn-success editPhongBanButton btn-sm" data-toggle="modal" data-target="#editPhongBanModal"><i class="fa fa-wrench" aria-hidden="true"></i> Cập nhật</button>         
-                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-delete-id="@child.MaPB"><i class="fa fa-trash" aria-hidden="true"></i> Xoá</button>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <button class="btn btn-success btn-sm editPhongBanButton" data-toggle="modal" data-target="#editPhongBanModal"><i class="fa fa-wrench" aria-hidden="true"></i> Cập nhật</button>
+                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-delete-id="@child.MaPB"><i class="fa fa-trash" aria-hidden="true"></i> Xoá</button>
+                        </div>
                     </td>
                 </tr>
             }
@@ -58,7 +58,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="deleteModalLabel">Xác nhận xoá</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -75,6 +75,7 @@
         </div>
     </div>
 </div>
+
 <!-- The Modal -->
 <div class="modal fade" id="createModal">
     <div class="modal-dialog modal-dialog-centered">
@@ -82,7 +83,7 @@
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">Tạo Phòng Ban Mới</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
 
             <!-- Modal body -->
@@ -113,14 +114,13 @@
     </div>
 </div>
 
-
 <div class="modal fade" id="editPhongBanModal" tabindex="-1" role="dialog" aria-labelledby="editPhongBanModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editPhongBanModalLabel">Sửa Thông Tin Phòng Ban</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -144,7 +144,6 @@
                             <option value="0">Không có</option>
                             @foreach (var phongBan in ViewBag.DanhSachPhongBan)
                             {
-                                
                                 <option value="@phongBan.MaPB">@phongBan.TenPB</option>
                             }
                         </select>
@@ -157,7 +156,6 @@
         </div>
     </div>
 </div>
-
 <script>
 
 

@@ -8,21 +8,23 @@
 <div id='calendar'></div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    var calendarEl = document.getElementById('calendar');
-    var events = @Html.Raw(Json.Encode(Model.Select(item => new {
-                title = item.HoTen + " - "+item.TenCa+"<br>" + item.ThoiGianBatDau.Hours + ":"+item.ThoiGianBatDau.Minutes+ " - " + item.ThoiGianKetThuc.Hours + ":" + item.ThoiGianKetThuc.Minutes ,
-                start = item.NgayBatDau.ToString("yyyy-MM-dd"),
-                end = item.NgayKetThuc.ToString("yyyy-MM-dd")
-            })));
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        eventContent: function (arg) {
-            return { html: '<div class="fc-title"style="font-size:13px;background-color:blue;padding:5px;">' + arg.event.title + '</div>' };
-        },
-        events: events
-    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        var events = @Html.Raw(Json.Encode(Model.Select(item => new {
+title = item.HoTen + " - " + item.TenCa + "<br>" + item.ThoiGianBatDau.Hours + ":" + item.ThoiGianBatDau.Minutes + " - " + item.ThoiGianKetThuc.Hours + ":" + item.ThoiGianKetThuc.Minutes,
+start = item.NgayBatDau.ToString("yyyy-MM-dd"),
+end = item.NgayKetThuc.ToString("yyyy-MM-dd"),
+shiftType = item.TenCa.Contains("Ca Sáng") ? "morning" : item.TenCa.Contains("Ca tối") ? "afternoon" : "other"
+}).OrderBy(e => e.shiftType)));
 
-    calendar.render();
-});
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: events,
+            eventContent: function (arg) {
+                return { html: '<div class="fc-title" style="font-size:13px;background-color:blue;padding:5px;">' + arg.event.title + '</div>' };
+            }
+        });
+
+        calendar.render();
+    });
 </script>

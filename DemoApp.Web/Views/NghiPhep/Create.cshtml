@@ -11,15 +11,15 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="container">
+    <div class="container mt-4">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="tuNgay">Từ ngày:</label>
                     <input type="text" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="tuNgay" name="tuNgay">
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="denNgay">Đến ngày:</label>
                     <input type="text" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="denNgay" name="denNgay">
@@ -27,21 +27,19 @@
             </div>
         </div>
         <div class="form-group">
-            <label>Loại nghỉ phép:</label>
-            <div class="form-group">
-                @Html.DropDownList("MaLoaiNghiPhep", new SelectList(ViewBag.DanhSachLoaiNghiPhep, "MaLoaiNghiPhep", "TenLoai"), "Chọn loại nghỉ phép", htmlAttributes: new { @class = "form-control", @id = "MaLoaiNghiPhep" })
-            </div>
+            <label for="MaLoaiNghiPhep">Loại nghỉ phép:</label>
+            @Html.DropDownList("MaLoaiNghiPhep", new SelectList(ViewBag.DanhSachLoaiNghiPhep, "MaLoaiNghiPhep", "TenLoai"), "Chọn loại nghỉ phép", htmlAttributes: new { @class = "form-control w-50", @id = "MaLoaiNghiPhep" })
         </div>
-            <div class="form-group">
-                <label for="lyDoBoSung">Lý do bổ sung:</label>
-                <textarea class="form-control" id="lyDoBoSung" rows="4" name="lyDoBoSung"></textarea>
-            </div>
-
-            <div class="form-group">
-                <input type="button" value="Nộp đơn" class="btn btn-success" id="btnSubmit" />
-            </div>
+        <div class="form-group">
+            <label for="lyDoBoSung">Lý do bổ sung:</label>
+            <textarea class="form-control" id="lyDoBoSung" rows="4" name="lyDoBoSung"></textarea>
         </div>
+        <div class="form-group text-center">
+            <input type="submit" value="Nộp đơn" class="btn btn-success" id="btnSubmit" />
+        </div>
+    </div>
 }
+
 
     <script>
         $(document).ready(function () {
