@@ -141,11 +141,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\614ded2f761c1c21130cec53.png" />
     <Content Include="img\anh1.png" />
     <Content Include="img\anh2.png" />
     <Content Include="img\anh3.png" />
     <Content Include="img\anh4.png" />
     <Content Include="img\anh5.png" />
+    <Content Include="img\logo-hrm-v2-1_4x.jpg" />
+    <Content Include="img\png-transparent-human-resource-management-system-computer-software-android-payroll-android-blue-text-trademark-thumbnail.png" />
+    <Content Include="img\xxl_153089012.jpg" />
     <Content Include="js\sb-admin-2.js" />
     <Content Include="js\sb-admin-2.min.js" />
     <Content Include="Scripts\bootstrap.js" />
