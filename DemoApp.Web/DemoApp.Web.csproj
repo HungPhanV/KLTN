@@ -218,6 +218,7 @@
     <Content Include="Views\NghiPhep\List.cshtml" />
     <Content Include="Views\ChamCong\TotalHoursWorkViewUser.cshtml" />
     <Content Include="Views\ChamCong\ToTalHoursWorkViewAdmin.cshtml" />
+    <Content Include="Views\User\RegisterAI.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

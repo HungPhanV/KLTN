@@ -25,6 +25,26 @@ namespace DemoApp.Web.Controllers
             ViewBag.DanhSachNhanVien = NhanVienService.NhanVien_List();
             return View(taiKhoans);
         }
+        public ActionResult RegisterAI()
+        {
+            return View();
+        }
+        [HttpGet]
+        public ActionResult GetCurrentUser()
+        {
+            // Lấy thông tin người dùng từ session
+            var loggedInUserJson = Session["LoggedInUserJson"];
+
+            if (loggedInUserJson != null)
+            {
+                var loggedInUser = JsonConvert.DeserializeObject<TaiKhoan>(loggedInUserJson.ToString());
+                return Json(new { userName = loggedInUser.Username, status = "success" }); // Thêm status
+            }
+            else
+            {
+                return Json(new { status = "error", message = "Không tìm thấy thông tin người dùng." });
+            }
+        }
 
         [HttpGet]
         [AllowAnonymous] //Có thể truy cập mà không bị yêu cầu xác thực trước,
@@ -89,5 +109,31 @@ namespace DemoApp.Web.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult FaceLogin(int id)
+        {
+            // Giả sử bạn có một phương thức để lấy tài khoản dựa trên username
+            TaiKhoan user = TaiKhoanService.GetTaiKhoanByID(id);
+
+            if (user != null)
+            {
+                // Lưu thông tin đăng nhập vào Session
+                string loggedInUserJson = JsonConvert.SerializeObject(user);
+                Session["LoggedInUserJson"] = loggedInUserJson;
+
+                // Lưu vai trò vào Session
+                Session["UserRole"] = user.Role;
+
+                // Trả về phản hồi đăng nhập thành công
+                return Json(new { status = true, message = "Đăng nhập thành công!" });
+            }
+            else
+            {
+                // Trả về phản hồi khi không tìm thấy tài khoản
+                return Json(new { status = false, message = "Không tìm thấy tài khoản!" });
+            }
+        }
+
     }
 }

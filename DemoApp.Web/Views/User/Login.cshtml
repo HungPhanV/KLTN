@@ -24,17 +24,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/plugins.min.css">
     <link rel="stylesheet" href="assets/css/kaiadmin.min.css">
-
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="assets/css/demo.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <link rel="stylesheet" href="~/assets/css/kaiadmin.min.css" />
     <link rel="stylesheet" href="~/assets/css/plugins.min.css" />
     <link rel="stylesheet" href="~/assets/css/demo.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 
 <body data-background-color="dark">
@@ -69,36 +68,34 @@
                         <div class="form-group">
                             <input type="text" class="form-control form-control-user bg-light text-black-50" id="exampleInputEmail" name="userName" aria-describedby="emailHelp" placeholder="Tên đăng nhập..." style="font-size:15px">
                         </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control form-control-user bg-light text-black-50" id="exampleInputPassword" name="password" placeholder="Mật khẩu..." style="font-size:15px">
+                        <div class="form-group">
+                            <input type="password" class="form-control form-control-user bg-light text-black-50" id="exampleInputPassword" name="password" placeholder="Mật khẩu..." style="font-size:15px">
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox small">
+                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                <label class="custom-control-label text-white" for="customCheck">Ghi nhớ tôi</label>
                             </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label text-white" for="customCheck">Ghi nhớ tôi</label>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-warning btn-user btn-block" style="font-size:15px">Đăng nhập</button>
-                                        <div class="text-center mt-2">
-                                            @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
-                {
-                                                <div class="alert alert-success" role="alert">@ViewBag.SuccessMessage</div>
-                                            }
-                                            else if (!string.IsNullOrEmpty(ViewBag.FailMessage))
-                                            {
-                                                <div class="alert alert-danger" role="alert">@ViewBag.FailMessage</div>
-                                            }
-                                        </div>
-                                        <hr>
+                        </div>
+                        <button type="submit" class="btn btn-warning d-block w-100 btn-user mx-auto text-white" style="font-size:16px">Đăng nhập</button>
+                        <div class="text-center mt-2">
+                            <button type="button" class="btn text-white w-75 mx-auto" id="loginWithFace" style="font-size:15px">
+                                <i class="fas fa-smile"></i> Đăng nhập bằng khuôn mặt
+                            </button>
+                        </div>
+                        <hr>
                     }
+                  
+
                     <a href="#!" class="text-white">Quên mật khẩu?</a>
-                    <p class="mb-5 pb-lg-2 text-white" >
-                        Chưa có tài khoản ? Liên hệ ngay
+                    <p class="mb-5 pb-lg-2 text-white">
+                        Chưa có tài khoản? Liên hệ ngay
                     </p>
                     <a href="#!" class="text-muted">Terms of use.</a>
                     <a href="#!" class="text-muted">Privacy policy</a>
                 </div>
             </div>
+
 
 
         </div>
@@ -107,45 +104,119 @@
 
     </div>
     <script>
-        $(document).ready(function () {
-            $("form.user").submit(function (event) {
-                // Ngăn chặn gửi form
-                event.preventDefault();
+    $(document).ready(function () {
+        // Xử lý sự kiện khi submit form đăng nhập bình thường
+        $("form.user").submit(function (event) {
+            // Ngăn chặn gửi form mặc định
+            event.preventDefault();
 
-                // Lấy giá trị của các trường input
-                var userName = $("#exampleInputEmail").val();
-                var password = $("#exampleInputPassword").val();
+            // Lấy giá trị của các trường input
+            var userName = $("#exampleInputEmail").val();
+            var password = $("#exampleInputPassword").val();
 
-                // Kiểm tra xem các trường có dữ liệu không
-                if (userName === '' && password === '') {
+            // Kiểm tra xem các trường có dữ liệu không
+            if (userName === '' && password === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi',
+                    text: 'Vui lòng nhập tên đăng nhập và mật khẩu!'
+                });
+            }
+            else if (userName === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi',
+                    text: 'Vui lòng nhập tên đăng nhập!'
+                });
+            }
+            else if (password === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi',
+                    text: 'Vui lòng nhập mật khẩu!'
+                });
+            }
+            else {
+                // Gửi form nếu dữ liệu hợp lệ
+                $("form.user").unbind("submit").submit();
+            }
+        });
+
+        // Kết nối với API start khi bấm nút đăng nhập bằng khuôn mặt
+        $("#loginWithFace").click(function () {
+            $.ajax({
+                url: "http://127.0.0.1:5000/start", // API xác thực khuôn mặt
+                method: "POST",
+                contentType: "application/json",
+                success: function (response) {
+                    // Hiển thị phản hồi từ API nếu thành công
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công',
+                        text: response.message
+                    });
+
+                    // Hiển thị chi tiết user nếu xác thực thành công
+                    if (response.status) {
+                        $("#startResponse").html(`
+                    <p>Xác thực thành công: ${response.user.username} (ID: ${response.user.user_id})</p>
+                `);
+
+                        // Gọi API đăng nhập với id trả về từ API start
+                        $.ajax({
+                            url: "/User/FaceLogin", // Đường dẫn tới API đăng nhập ở backend
+                            method: "POST",
+                            data: { id: response.user.user_id }, // Truyền id lấy từ response
+                            success: function (loginResponse) {
+                                if (loginResponse.status) {
+                                    // Hiển thị thông báo đăng nhập thành công
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Đăng nhập thành công',
+                                        text: loginResponse.message,
+                                        timer: 2000, // Thời gian hiển thị thông báo là 2 giây
+                                        showConfirmButton: false // Không cần nút xác nhận
+                                    });
+
+                                    // Chuyển trang sau 2 giây
+                                    setTimeout(function () {
+                                        window.location.href = "/Home/ThongKe"; // Điều hướng tới trang sau khi đăng nhập
+                                    }, 2000); // Trì hoãn 2 giây trước khi chuyển hướng
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Đăng nhập thất bại',
+                                        text: loginResponse.message
+                                    });
+                                }
+                            },
+                            error: function (xhr) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Lỗi',
+                                    text: xhr.responseJSON ? xhr.responseJSON.message : 'Có lỗi xảy ra khi gọi API đăng nhập!'
+                                });
+                            }
+                        });
+                    } else {
+                        $("#startResponse").html(`<p>${response.message}</p>`);
+                    }
+                },
+                error: function (xhr) {
+                    // Xử lý khi có lỗi từ API start
                     Swal.fire({
                         icon: 'error',
                         title: 'Lỗi',
-                        text: 'Vui lòng nhập tên đăng nhập và mật khẩu!'
+                        text: xhr.responseJSON ? xhr.responseJSON.message : 'Không thể kết nối tới API!'
                     });
-                }
-                else if (userName === '') {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Lỗi',
-                        text: 'Vui lòng nhập tên đăng nhập!'
-                    });
-                }
-                else if (password === '') {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Lỗi',
-                        text: 'Vui lòng nhập mật khẩu!'
-                    });
-                }
-                else {
-                    // Gửi form nếu dữ liệu hợp lệ
-                    $("form.user").unbind("submit").submit();
-
                 }
             });
         });
+
+
+    });
     </script>
+
 
 
 </body>

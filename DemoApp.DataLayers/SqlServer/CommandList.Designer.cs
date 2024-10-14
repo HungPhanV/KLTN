@@ -637,6 +637,15 @@ namespace DemoApp.DataLayers.SqlServer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to proc_TaiKhoan_SelectByID.
+        /// </summary>
+        internal static string TaiKhoan_SelectByID {
+            get {
+                return ResourceManager.GetString("TaiKhoan_SelectByID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to proc_TaiKhoan_Update.
         /// </summary>
         internal static string TaiKhoan_Update {

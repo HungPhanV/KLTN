@@ -128,5 +128,36 @@ namespace DemoApp.DataLayers.SqlServer
                 }
             }
         }
+        public TaiKhoan GetByID(int id)
+        {
+            TaiKhoan data = null;
+
+            using (SqlConnection cn = GetConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand(CommandList.TaiKhoan_SelectByID, cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    using (var dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                    {
+                        if (dbReader.Read())
+                        {
+                            data = new TaiKhoan()
+                            {
+                                Username = dbReader["Username"].ToString(),
+                                Password = dbReader["Password"].ToString(), // Nếu cần lấy cả mật khẩu
+                                MaNV = Convert.ToInt32(dbReader["MaNV"]),
+                                Role = dbReader["Role"].ToString()
+                            };
+                        }
+                        dbReader.Close();
+                    }
+                }
+            }
+
+            return data;
+        }
+
     }
 }

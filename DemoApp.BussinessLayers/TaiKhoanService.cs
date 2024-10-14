@@ -25,6 +25,10 @@ namespace DemoApp.BussinessLayers
         {
             return _TaiKhoanDB.Authorize(userName, password);
         }
+        public static TaiKhoan GetTaiKhoanByID(int id)
+        {
+            return _TaiKhoanDB.GetByID(id);
+        }
         public static IList<Entities.TaiKhoan> List()
         {
             return _TaiKhoanDB.List();

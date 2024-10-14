@@ -318,4 +318,7 @@
   <data name="NghiPhep_ListByMaNV" xml:space="preserve">
     <value>proc_NghiPhep_ListByMaNV</value>
   </data>
+  <data name="TaiKhoan_SelectByID" xml:space="preserve">
+    <value>proc_TaiKhoan_SelectByID</value>
+  </data>
 </root>

@@ -19,5 +19,6 @@ namespace DemoApp.DataLayers.SqlServer
         int Update(TaiKhoan tk);
         int DeleteByMaNV(int maNV);
         int UpdateRoleByMaNV(int maNV, string newRole);
+        TaiKhoan GetByID(int id);
     }
 }
