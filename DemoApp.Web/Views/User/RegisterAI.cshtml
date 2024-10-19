@@ -3,25 +3,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
-    /* Đặt chiều cao của container và căn giữa theo chiều dọc */
-    .container-custom {
-        height: 88vh; /* Chiều cao toàn màn hình */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #f8f9fa; /* Màu nền của container */
-    }
-</style>
-
-<div class="container container-custom">
-    <div class="row">
-        <div class="col text-center">
-@{
-    ViewBag.Title = "ThongKe";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
 <!-- Thêm link Font Awesome CDN nếu chưa có -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
@@ -48,7 +29,52 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        // Khi nhấn nút "Đăng ký khuôn mặt"
+        $("#saveButton").click(function () {
+            // Gọi API để lấy thông tin người dùng đăng nhập
+            $.ajax({
+                url: "/User/GetCurrentUserInfo",  // Thay thế 'ControllerName' bằng tên controller
+                method: "GET",
+                success: function (response) {
+                    if (response.status) {
+                        const userName = response.userName;
+                        const userId = response.userId;
+                        // Gọi API /add với username và userId đã lấy
+                        $.ajax({
+                            url: "http://127.0.0.1:5000/add",
+                            method: "POST",
+                            contentType: "application/json",
+                            data: JSON.stringify({
+                                userName: userName,
+                                userId: userId
+                            }),
+                            success: function (addResponse) {
+                                if (addResponse.status === 'ok') {
+                                    alert('Đăng ký khuôn mặt thành công!');
+                                } else {
+                                    alert(addResponse.message);
+                                }
+                            },
+                            error: function (xhr) {
+                                alert('Lỗi: ' + (xhr.responseJSON ? xhr.responseJSON.message : 'Có lỗi xảy ra!'));
+                            }
+                        });
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert('Không thể lấy thông tin người dùng.');
+                }
+            });
+        });
 
-        </div>
-    </div>
-</div>
+        // Khi nhấn nút "Huỷ đăng ký khuôn mặt"
+        $("#cancelButton").click(function () {
+            alert('Huỷ đăng ký khuôn mặt!');
+        });
+    });
+
+</script>

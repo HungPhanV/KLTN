@@ -30,6 +30,28 @@ namespace DemoApp.Web.Controllers
             return View();
         }
         [HttpGet]
+        public ActionResult GetCurrentUserInfo()
+        {
+            // Lấy thông tin người dùng từ session
+            var loggedInUserJson = Session["LoggedInUserJson"];
+            var userId = Session["UserID"];
+            if (loggedInUserJson != null)
+            {
+                var loggedInUser = JsonConvert.DeserializeObject<TaiKhoan>(loggedInUserJson.ToString());
+                return Json(new
+                {
+                    status = true,
+                    userName = loggedInUser.Username,
+                    userId = userId,
+                }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { status = false, message = "Người dùng chưa đăng nhập!" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpGet]
         public ActionResult GetCurrentUser()
         {
             // Lấy thông tin người dùng từ session
@@ -69,7 +91,6 @@ namespace DemoApp.Web.Controllers
         }
 
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(string userName, string password)
@@ -80,6 +101,9 @@ namespace DemoApp.Web.Controllers
             {
                 string loggedInUserJson = JsonConvert.SerializeObject(loggedInUser);
                 Session["LoggedInUserJson"] = loggedInUserJson;
+
+                // Lưu thêm ID của người dùng vào session
+                Session["UserID"] = loggedInUser.id;
 
                 // Lưu vai trò vào Session
                 Session["UserRole"] = loggedInUser.Role;
@@ -95,6 +119,7 @@ namespace DemoApp.Web.Controllers
                 return View();
             }
         }
+
 
 
         public ActionResult Logout()
@@ -115,6 +140,9 @@ namespace DemoApp.Web.Controllers
         {
             // Giả sử bạn có một phương thức để lấy tài khoản dựa trên username
             TaiKhoan user = TaiKhoanService.GetTaiKhoanByID(id);
+            var userName = user.Username;
+            var passWord = user.Password;
+            var userLogin = TaiKhoanService.Authorize(userName, passWord);  // Chúng ta không cần mật khẩu cho đăng nhập bằng khuôn mặt
 
             if (user != null)
             {
@@ -122,11 +150,12 @@ namespace DemoApp.Web.Controllers
                 string loggedInUserJson = JsonConvert.SerializeObject(user);
                 Session["LoggedInUserJson"] = loggedInUserJson;
 
-                // Lưu vai trò vào Session
+                // Lưu ID và vai trò của người dùng vào Session
+                Session["UserID"] = user.id;
                 Session["UserRole"] = user.Role;
 
                 // Trả về phản hồi đăng nhập thành công
-                return Json(new { status = true, message = "Đăng nhập thành công!" });
+                return Json(new { status = true, message = "Đăng nhập bằng khuôn mặt thành công!" });
             }
             else
             {

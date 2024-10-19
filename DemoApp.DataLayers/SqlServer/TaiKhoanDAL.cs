@@ -21,9 +21,9 @@ namespace DemoApp.DataLayers.SqlServer
             {
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Username, MaNV, Role
-                                        FROM TaiKhoan
-                                        WHERE Username = @Username AND Password = @Password";
+                    cmd.CommandText = @"SELECT id, Username, MaNV, Role
+                                FROM TaiKhoan
+                                WHERE Username = @Username AND Password = @Password";
 
                     cmd.CommandType = System.Data.CommandType.Text;
                     cmd.Parameters.AddWithValue("@Username", userName);
@@ -35,6 +35,8 @@ namespace DemoApp.DataLayers.SqlServer
                         {
                             data = new TaiKhoan()
                             {
+                                // Gán thêm giá trị ID
+                                id = Convert.ToInt32(dbReader["id"]),
                                 Username = Convert.ToString(dbReader["Username"]),
                                 MaNV = Convert.ToInt32(dbReader["MaNV"]),
                                 Role = Convert.ToString(dbReader["Role"])
@@ -47,6 +49,7 @@ namespace DemoApp.DataLayers.SqlServer
 
             return data;
         }
+
         public IList<Entities.TaiKhoan> List()
         {
             List<TaiKhoan> data = new List<TaiKhoan>();
@@ -145,6 +148,7 @@ namespace DemoApp.DataLayers.SqlServer
                         {
                             data = new TaiKhoan()
                             {
+                                id = Convert.ToInt32(dbReader["id"]),
                                 Username = dbReader["Username"].ToString(),
                                 Password = dbReader["Password"].ToString(), // Nếu cần lấy cả mật khẩu
                                 MaNV = Convert.ToInt32(dbReader["MaNV"]),
