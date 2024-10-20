@@ -89,7 +89,6 @@
 
     $(document).ready(function () {
         loadTableData(currentPage); // Load data for the initial page
-        loadTableDataQuaTrinh()
         setActiveButton(currentPage); // Set the initial active button
     });
 
@@ -115,7 +114,7 @@
             error: function (error) {
                 console.error('Lỗi khi tải lại bảng:', error);
             }
-        });S
+        });
     }
 
     // Xử lý sự kiện khi nút "Lọc và Tìm kiếm" được bấm
