@@ -22,6 +22,11 @@ namespace DemoApp.BussinessLayers
                
             }
         }
+        public static NhanVien GetNhanVienById(int id)
+        {
+            return _NhanVienDB.GetNhanVienById(id);
+        }
+
         public static int GetTotalNumberOfNhanViens()
         {
             return _NhanVienDB.GetTotalNumberOfNhanViens();

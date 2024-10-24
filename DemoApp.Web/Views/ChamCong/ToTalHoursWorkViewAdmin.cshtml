@@ -31,8 +31,8 @@
 @using (Html.BeginForm("TotalHoursByMonth", "ChamCong", FormMethod.Get))
 {
     <label for="month">Chọn tháng:</label>
-    <input type="month" id="month" name="month" required>
-    <button type="submit" class="btn btn-primary btn-sm mb-1">Xem tổng giờ làm</button>
+    <input type="month" id="month" name="month" required value="@DateTime.Now.ToString("yyyy-MM")">
+    <button type="submit" class="btn btn-primary btn-sm mb-1" id="submitBtn">Xem tổng giờ làm</button>
 }
 
 
@@ -84,34 +84,6 @@
         </tbody>
     </table>
 </div>
-
-<h2 class="text-center">Danh sách đơn nghỉ phép</h2>
-<table class="table table-striped table-condensed mt-5">
-    <thead class="thead-light">
-        <tr>
-            <th>Mã nhân viên</th>
-            <th>Ngày bắt đầu</th>
-            <th>Ngày kết thúc</th>
-            <th>Tổng số ngày</th>
-            <th>Loại nghỉ phép</th>
-            <th>Lý do bổ sung</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.ListNghiPhep)
-        {
-            <tr>
-                <td>@item.MaNV</td>
-                <td>@item.NgayBatDau.ToString("dd/MM/yyyy")</td>
-                <td>@item.NgayKetThuc.ToString("dd/MM/yyyy")</td>
-                <td>@((item.NgayKetThuc - item.NgayBatDau).Days + 1) ngày</td>
-                <td>@Html.DisplayFor(modelItem => item.MaLoaiNghiPhep)</td>
-                <td>@Html.DisplayFor(modelItem => item.LyDoBoSung)</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
 <style>
     .table-responsive {
         width: 100%;

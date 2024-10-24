@@ -321,4 +321,7 @@
   <data name="TaiKhoan_SelectByID" xml:space="preserve">
     <value>proc_TaiKhoan_SelectByID</value>
   </data>
+  <data name="NhanVien_SelectByMaNV" xml:space="preserve">
+    <value>proc_NhanVien_SelectByMaNV</value>
+  </data>
 </root>

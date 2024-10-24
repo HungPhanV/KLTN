@@ -3,7 +3,42 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="text-center">Thống kê</h2>
+<h2 class="text-center">Thống kê hệ thống</h2>
+
+<div class="row mb-4">
+    <div class="col-3">
+        <div class="card text-center bg-warning">
+            <div class="card-body">
+                <h5 class="card-title">Số lượng nhân viên</h5>
+                <p class="card-text" style="font-size: 2rem;">@ViewBag.SLNV</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="card text-center bg-info">
+            <div class="card-body">
+                <h5 class="card-title">Số lượng phòng ban</h5>
+                <p class="card-text" style="font-size: 2rem;">@ViewBag.SLPB</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="card text-center bg-danger">
+            <div class="card-body">
+                <h5 class="card-title">Số lượng hợp đồng</h5>
+                <p class="card-text" style="font-size: 2rem;">@ViewBag.SLHD</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="card text-center bg-primary">
+            <div class="card-body">
+                <h5 class="card-title">Tổng số tài khoản: </h5>
+                <p class="card-text" style="font-size: 2rem;">7</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-md-6 text-center">

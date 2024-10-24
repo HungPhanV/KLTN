@@ -44,6 +44,15 @@ namespace DemoApp.Web.Controllers
             return View(nhanViens);
         }
 
+        [HttpGet]
+        public ActionResult GetNhanVienById()
+        {
+            int MaNV = Convert.ToInt32(Session["MaNV"]);
+            // Gọi service để lấy thông tin nhân viên theo mã nhân viên
+            NhanVien nhanVien = NhanVienService.GetNhanVienById(MaNV);
+            // Trả về dữ liệu nhân viên dưới dạng JSON
+            return Json(nhanVien, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpGet]
         public ActionResult Create()

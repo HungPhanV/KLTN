@@ -59,9 +59,16 @@ namespace DemoApp.Web.Controllers
             return View(model);
         }
 
-        public ActionResult TotalHoursByMonth(string month)
+        public ActionResult TotalHoursByMonth(string month = null)
         {
             int maNV = Convert.ToInt32(Session["MaNV"]);
+
+            // Nếu month là null, gán giá trị mặc định là tháng hiện tại
+            if (string.IsNullOrEmpty(month))
+            {
+                month = DateTime.Now.ToString("yyyy-MM");
+            }
+
             // Xử lý chuỗi 'month' để lấy giá trị tháng và năm
             int selectedMonth = int.Parse(month.Split('-')[1]); // Lấy giá trị tháng từ chuỗi 'month'
             int selectedYear = int.Parse(month.Split('-')[0]); // Lấy giá trị năm từ chuỗi 'month'
@@ -75,8 +82,8 @@ namespace DemoApp.Web.Controllers
                 TongHopChamCongTheoThang = totalHoursWorkView,
                 ListNghiPhep = totalNghiPhep,
                 ListCaLam = listCaLam
-                //
             };
+
             return View("TotalHoursWorkViewAdmin", model);
         }
 

@@ -72,12 +72,75 @@
                     @if (item.TrangThai == "Đang chờ")
                     {
                         <div class="btn-group" role="group">
-                            <a href="#" class="btn btn-success btn-sm text-light" data-id="@item.ID">Phê duyệt</a>
-                            <a href="#" class="btn btn-danger btn-sm text-light" data-id="@item.ID">Huỷ bỏ</a>
+                            <a href="#" class="btn btn-success btn-sm text-light approve-button" data-id="@item.ID" data-trangthai="Đã phê duyệt">Phê duyệt</a>
+                            <a href="#" class="btn btn-danger btn-sm text-light reject-button" data-id="@item.ID" data-trangthai="Đã huỷ bỏ">Huỷ bỏ</a>
                         </div>
                     }
                 </td>
+
             </tr>
                         }
     </tbody>
 </table>
+<script>
+    $(document).ready(function () {
+        // Xử lý sự kiện khi bấm nút phê duyệt
+        $('.approve-button').click(function (event) {
+            event.preventDefault(); // Ngăn chặn hành động mặc định của link
+            var id = $(this).data('id'); // Lấy ID từ thuộc tính data-id
+            var trangThai = $(this).data('trangthai'); // Lấy trạng thái từ thuộc tính data-trangthai
+
+            // Gọi API để cập nhật trạng thái
+            $.ajax({
+                url: '/NghiPhep/UpdateTrangThai', // Đường dẫn đến API
+                type: 'POST',
+                data: { id: id, trangThai: trangThai }, // Gửi ID và trạng thái
+                success: function (response) {
+                    if (response.success) {
+                        // Hiển thị thông báo thành công
+                        swal("Phê duyệt thành công!", "Trạng thái đã được cập nhật.", "success").then(() => {
+                            location.reload(); // Tải lại trang để cập nhật danh sách
+                        });
+                    } else {
+                        // Hiển thị thông báo lỗi
+                        swal("Có lỗi!", "Cập nhật không thành công.", "error");
+                    }
+                },
+                error: function () {
+                    // Hiển thị thông báo lỗi
+                    swal("Có lỗi!", "Có lỗi xảy ra. Vui lòng thử lại.", "error");
+                }
+            });
+        });
+
+        // Xử lý sự kiện khi bấm nút huỷ bỏ
+        $('.reject-button').click(function (event) {
+            event.preventDefault(); // Ngăn chặn hành động mặc định của link
+            var id = $(this).data('id'); // Lấy ID từ thuộc tính data-id
+            var trangThai = $(this).data('trangthai'); // Lấy trạng thái từ thuộc tính data-trangthai
+
+            // Gọi API để cập nhật trạng thái
+            $.ajax({
+                url: '/NghiPhep/UpdateTrangThai', // Đường dẫn đến API
+                type: 'POST',
+                data: { id: id, trangThai: trangThai }, // Gửi ID và trạng thái
+                success: function (response) {
+                    if (response.success) {
+                        // Hiển thị thông báo thành công
+                        swal("Huỷ bỏ thành công!", "Trạng thái đã được cập nhật.", "success").then(() => {
+                            location.reload(); // Tải lại trang để cập nhật danh sách
+                        });
+                    } else {
+                        // Hiển thị thông báo lỗi
+                        swal("Có lỗi!", "Cập nhật không thành công.", "error");
+                    }
+                },
+                error: function () {
+                    // Hiển thị thông báo lỗi
+                    swal("Có lỗi!", "Có lỗi xảy ra. Vui lòng thử lại.", "error");
+                }
+            });
+        });
+    });
+</script>
+

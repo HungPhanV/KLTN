@@ -12,6 +12,41 @@ namespace DemoApp.DataLayers.SqlServer
             : base(connectionString)
         {
         }
+        public NhanVien GetNhanVienById(int id)
+        {
+            NhanVien nhanVien = null;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                // Sử dụng stored procedure proc_NhanVien_SelectByMaNV
+                using (SqlCommand cmd = new SqlCommand(CommandList.NhanVien_SelectByMaNV, connection))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@MaNV", id);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            nhanVien = new NhanVien
+                            {
+                                MaNV = Convert.ToInt32(reader["MaNV"]),
+                                HoTen = reader["HoTen"].ToString(),
+                                HinhAnh = reader["HinhAnh"].ToString(),
+                                NgaySinh = Convert.ToDateTime(reader["NgaySinh"]),
+                                QueQuan = reader["QueQuan"].ToString(),
+                                SDT = reader["SDT"].ToString(),
+                                GioiTinh = reader["GioiTinh"].ToString(),
+                            };
+                        }
+                    }
+                }
+            }
+
+            return nhanVien;
+        }
         public string GetHinhAnhById(int id)
         {
             string hinhAnh = null;

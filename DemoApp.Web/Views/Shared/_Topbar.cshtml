@@ -20,12 +20,12 @@
             </li>
             <li class="nav-item topbar-user dropdown hidden-caret">
                 <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
-                    <div class="avatar-sm">
+                    <div class="avatar-sm m-2">
                         <img src="~/img/anh1.png" alt="..." class="avatar-img rounded-circle" />
                     </div>
-                    <span class="profile-username text-white">
+                    <span class="text-white">
                         <span class="op-7">Hi,</span>
-                        <span class="fw-bold">Admin</span>
+                        <span class="fw-bold profile-username">Admin</span>
                     </span>
                 </a>
                 <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -58,3 +58,30 @@
         </ul>
     </div>
 </nav>
+<script>
+    $(document).ready(function () {
+        // Gọi API để lấy thông tin nhân viên
+        $.ajax({
+            url: '/NhanVien/GetNhanVienById',  // Đường dẫn API
+            type: 'GET',
+            success: function (data) {
+                if (data) {
+                    // Cập nhật tên người dùng
+                    $('.profile-username').text(data.HoTen);  // Cập nhật tên nhân viên
+
+                    if (data.HinhAnh) {
+                        // Giả sử đường dẫn ảnh từ API là tương đối
+                        var fullPath = '@Url.Content("~/img/")' + data.HinhAnh; // Thay đường dẫn vào đây
+                        $('.avatar-img').attr('src', fullPath);  // Cập nhật ảnh đại diện
+                    }
+
+                }
+            },
+            error: function () {
+                console.log("Không thể lấy thông tin nhân viên.");
+            }
+        });
+    });
+</script>
+
+

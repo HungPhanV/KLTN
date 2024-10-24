@@ -62,13 +62,13 @@
                     @item.MaNV
                 </td>              
                 <td class="btn-group">
-                    <button class=" btn-warning btn-sm editHopDongButton text-white" data-toggle="modal" data-target="#editHopDongModal" data-id="@item.MaHD"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</button> |
+                    <button class="btn-warning btn-sm editHopDongButton text-white" data-toggle="modal" data-target="#editHopDongModal" data-id="@item.MaHD"> Sửa</button> |
                     @using (Html.BeginForm("DetailHopDong", "HopDong", new { id = item.MaHD }, FormMethod.Post))
                     {
-                        <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-info-circle" aria-hidden="true"></i> Chi tiết</button>
+                        <button type="submit" class="btn-primary btn-sm">Chi tiết</button>
                     }
 
-                    | <button class="btn-danger btn-sm" data-toggle="modal" data-target="#deleteModalHopDong" data-delete-hopdong-id="@item.MaHD"><i class="fa fa-trash" aria-hidden="true"></i> Xoá</button>
+                    | <button class="btn-danger btn-sm" data-toggle="modal" data-target="#deleteModalHopDong" data-delete-hopdong-id="@item.MaHD"> Xoá</button>
                 </td>
                 
             </tr>

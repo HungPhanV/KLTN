@@ -25,6 +25,7 @@ namespace DemoApp.Web.Controllers
             ViewBag.DanhSachNhanVien = NhanVienService.NhanVien_List();
             return View(taiKhoans);
         }
+
         public ActionResult RegisterAI()
         {
             return View();
@@ -104,7 +105,7 @@ namespace DemoApp.Web.Controllers
 
                 // Lưu thêm ID của người dùng vào session
                 Session["UserID"] = loggedInUser.id;
-
+                Session["MaNV"] = loggedInUser.MaNV;
                 // Lưu vai trò vào Session
                 Session["UserRole"] = loggedInUser.Role;
 

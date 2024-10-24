@@ -9,7 +9,7 @@ namespace DemoApp.Entities
 {
     public class NhanVien
     {
-        public int MaNV { get; set; }
+        public int? MaNV { get; set; }
         public string HoTen { get; set; }
         public DateTime NgaySinh { get; set; } // Thêm thuộc tính NgaySinh
         public string QueQuan { get; set; }

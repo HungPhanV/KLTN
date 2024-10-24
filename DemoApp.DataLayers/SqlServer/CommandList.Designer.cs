@@ -493,6 +493,15 @@ namespace DemoApp.DataLayers.SqlServer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to proc_NhanVien_SelectByMaNV.
+        /// </summary>
+        internal static string NhanVien_SelectByMaNV {
+            get {
+                return ResourceManager.GetString("NhanVien_SelectByMaNV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to proc_NhanVien_Update.
         /// </summary>
         internal static string NhanVien_Update {

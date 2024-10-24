@@ -50,7 +50,7 @@
                 <td>@Html.DisplayFor(modelItem => item.MaLoai)</td>
                 <td class="text-center">
                     @Html.ActionLink("Cập nhật", "Update", new { id = item.MaNV }, new { @class = "btn btn-warning btn-sm text-light" }) |
-                    @Html.ActionLink("Hồ sơ", "Detail", new { id = item.MaNV, currentPage = ViewBag.ThisPage }, new { @class = "btn btn-primary btn-sm" }) |
+                    
                     <button class="btn btn-danger btn-sm delete-button" data-toggle="modal" data-target="#deleteModal" data-delete-id="@item.MaNV">Xoá</button>
                 </td>
             </tr>

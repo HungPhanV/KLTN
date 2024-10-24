@@ -30,5 +30,6 @@ namespace DemoApp.DataLayers
         int Update(NhanVien nv);
         int Delete(NhanVien nv);
         int CountNhanVienByGender(string gender);
+        NhanVien GetNhanVienById(int id);
     }
 }
